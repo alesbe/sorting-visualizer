@@ -1,5 +1,7 @@
 #pragma once
 #include <vector>
+#include <algorithm>
+#include <random>
 #include "Sortable.h"
 #include "SortAlgorithms.h"
 
@@ -7,12 +9,16 @@ class SortController
 {
 public:
 	int winWidth, winHeight;
+	int timeSleep;
 
 	std::vector<Sortable> sortElements;
-	int sortAlgorithm = 0; // 0 bubble, 1 insertion, 2 = boggo...
 
-	SortController(sf::Vector2u windowSize);
+	SortController(sf::Vector2u windowSize, int timeSleep);
+	void clear();
 	void populate(int numOfElements);
-	void startSort();
+	void startSort(int sortType);
+	void randomize();
+	bool isSorted();
+	void checkSort();
 };
 

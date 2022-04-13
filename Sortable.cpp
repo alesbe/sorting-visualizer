@@ -7,5 +7,5 @@ Sortable::Sortable(float width, float height, int value) {
 }
 
 sf::RectangleShape Sortable::shape() {
-	return sf::RectangleShape(sf::Vector2f(width, height));
+	return sf::RectangleShape(sf::Vector2f((float)width, (float)height));
 }

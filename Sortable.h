@@ -1,12 +1,11 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 class Sortable
 {
-private:
-	sf::Color color = sf::Color::White;
-
 public:
+	sf::Color color = sf::Color::White;
 	int value;
 	float width, height;
 

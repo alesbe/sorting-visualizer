@@ -1,3 +1,7 @@
 #pragma once
+#include <vector>
+#include "Sortable.h"
 
-int add(int a, int b);
+namespace algo {
+	void bubbleSort(std::vector<Sortable>& sortElements, int timeSleep);
+}
