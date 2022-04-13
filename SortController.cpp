@@ -19,7 +19,8 @@ void SortController::populate(int numOfElements) {
 }
 
 void SortController::startSort(int sortType) {
-	while (!isSorted()) {
+	while (!isSorted())
+	{
 		if (sortType == 0) {
 			algo::bubbleSort(sortElements, timeSleep);
 		}

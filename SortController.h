@@ -8,6 +8,7 @@
 class SortController
 {
 public:
+	bool isSorting = false;
 	int winWidth, winHeight;
 	int timeSleep;
 

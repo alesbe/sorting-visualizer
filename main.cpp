@@ -6,7 +6,12 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <thread>
 #include "SortController.h"
+
+void test(int num) {
+    std::cout << "Hi, this is a test and this is my number: " << num << std::endl;
+}
 
 int main()
 {
@@ -16,8 +21,9 @@ int main()
     int timeSleep = 50;
     int sortType = 0;
 
-    SortController sortController(window.getSize(), timeSleep);
+    std::thread sortingThread;
 
+    SortController sortController(window.getSize(), timeSleep);
     
     sortController.populate(numOfElements);
     while (window.isOpen())
@@ -30,14 +36,16 @@ int main()
                 switch (event.key.code)
                 {
 
-                // Randomize and start sorting
+                    // Randomize and start sorting
                 case sf::Keyboard::Space:
-                    std::cout << "Randomizing..." << std::endl;
-                    sortController.randomize();
+                    if (!sortController.isSorting) {
+                        std::cout << "Randomizing..." << std::endl;
+                        sortController.randomize();
 
-                    std::cout << "Sort number " << sortType << " started!" << std::endl;
-                    std::cout << "thread started" << std::endl;
-                    //sortController.startSort(sortType);
+                        sortingThread = std::thread(&SortController::startSort, sortController, sortType);
+                        sortingThread.detach();
+                    }
+
                     break;
 
                 // Change sort type (increase)
@@ -80,13 +88,16 @@ int main()
         window.clear(sf::Color::Black);
 
         // Draw sortables
-        for (int n = 0; n < sortController.sortElements.size(); n++) {
-            Sortable sortable = sortController.sortElements[n];
-            sf::RectangleShape shape = sortable.shape();
+        int index = 0;
+        std::cout << "{ ";
+        for (Sortable sortable : sortController.sortElements) {
+            std::cout << "[" << sortable.value << ", " << index << "], ";
 
-            shape.setPosition(sf::Vector2f(sortable.width * n, sortController.winHeight - sortable.height));
+            sf::RectangleShape shape = sortable.shape();
+            shape.setPosition(sf::Vector2f(sortable.width * index++, sortController.winHeight - sortable.height));
             window.draw(shape);
         }
+        std::cout << " }" << std::endl;
 
         window.display();
     }

@@ -9,11 +9,14 @@ namespace algo {
 
 		for (int n = 0; n < sortElements.size() - 1; n++) {
 
+			/*
 			std::cout << "[";
 			for (auto i : sortElements) {
 				std::cout << i.value << ", ";
 			}
 			std::cout << "]" << std::endl;
+			
+			*/
 
 			if (sortElements[n].value > sortElements[n + 1].value) {
 				// Change color while sorting
