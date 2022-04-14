@@ -13,19 +13,22 @@ void SortController::clear() {
 
 void SortController::populate(int numOfElements) {
 	for (int n = 0; n < numOfElements; n++) {
-		Sortable sortable((float)(winWidth / numOfElements), (float)(winHeight / numOfElements) * (n+1), n); // Width defined to space max space in window, height defined by Sortable value
+		std::cout << (winWidth / numOfElements) << std::endl;
+		Sortable sortable(((float)winWidth / numOfElements), ((float)winHeight / numOfElements) * (n+1), n); // Width defined to space max space in window, height defined by Sortable value
 		sortElements.push_back(sortable);
 	}
 }
 
 void SortController::startSort(int sortType) {
 	std::cout << "Sort started via thread!" << std::endl;
+	isSorting = true;
 	while (!isSorted())
 	{
 		if (sortType == 0) {
 			algo::bubbleSort(sortElements, timeSleep);
 		}
 	}
+	isSorting = false;
 	std::cout << "Sorting finished!" << std::endl;
 	std::cout << std::endl;
 }

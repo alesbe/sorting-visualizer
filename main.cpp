@@ -36,7 +36,7 @@ int main()
                 switch (event.key.code)
                 {
 
-                    // Randomize and start sorting
+                // Randomize and start sorting
                 case sf::Keyboard::Space:
                     if (!sortController.isSorting) {
                         std::cout << "Randomizing..." << std::endl;
@@ -49,7 +49,7 @@ int main()
                     break;
 
                 // Change sort type (increase)
-                case (sf::Keyboard::Up):
+                case sf::Keyboard::Up:
                     sortType++;
                     std::cout << "Sort changed to: " << sortType << std::endl;
                     break;
