@@ -52,7 +52,7 @@ void SortController::startSort(int sortType) {
 		}
 	}
 
-	std::cout << timeSort.getElapsedTime().asMilliseconds() << std::endl;
+	std::cout << timeSort.getElapsedTime().asMilliseconds() << "ms" << std::endl;
 	checkSort();
 	isSorting = false;
 }
