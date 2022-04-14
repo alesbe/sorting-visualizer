@@ -1,5 +1,11 @@
 #pragma once
 #include <vector>
+
+#if defined(_WIN32)
+#include <Windows.h>
+#define PLATFORM "windows"
+#endif
+
 #include "Sortable.h"
 
 namespace algo {

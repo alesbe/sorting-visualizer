@@ -2,6 +2,8 @@
 - Sort Types -
 0: Bubble Sort
 1: ...
+
+Due to the 1ms resolution of timers on Windows, the speed scale is smaller. The Linux version has a higher time resoltion < 1ms!
 */
 
 #include <SFML/Graphics.hpp>
@@ -9,16 +11,12 @@
 #include <thread>
 #include "SortController.h"
 
-void test(int num) {
-    std::cout << "Hi, this is a test and this is my number: " << num << std::endl;
-}
-
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(600, 400), "Sorting visualizer v0.1-alpha");
+    sf::RenderWindow window(sf::VideoMode(600, 400), "Sorting visualizer v0.2-alpha");
 
-    int numOfElements = 10;
-    int timeSleep = 1;
+    int numOfElements = 50;
+    int timeSleep = 1; // milliseconds
     int sortType = 0;
 
     std::thread sortingThread;
@@ -39,13 +37,23 @@ int main()
                 // Randomize and start sorting
                 case sf::Keyboard::Space:
                     if (!sortController.isSorting) {
-                        std::cout << "Randomizing..." << std::endl;
+                        std::cout << "Starting sort!" << std::endl;
+                        sortController.clear();
+                        sortController.populate(numOfElements);
                         sortController.randomize();
 
                         sortingThread = std::thread(&SortController::startSort, &sortController, sortType);
                         sortingThread.detach();
                     }
+                    break;
 
+                // Stop sort
+                case sf::Keyboard::Backspace:
+                    if (sortController.isSorting) {
+                        std::cout << "Sort stopped!" << std::endl;
+                        sortController.clear();
+                        sortController.populate(numOfElements);
+                    }
                     break;
 
                 // Change sort type (increase)
@@ -76,6 +84,25 @@ int main()
                     std::cout << "Num of elements changed to: " << numOfElements << std::endl;
                     break;
 
+                // Change number of sortables through console
+                case sf::Keyboard::F1:
+                    std::cout << "Number of sortables: ";
+                    std::cin >> numOfElements;
+                    std::cout << std::endl;
+
+                    sortController.clear();
+                    sortController.populate(numOfElements);
+                    break;
+
+                // Change time between iterations
+                case sf::Keyboard::F2:
+                    std::cout << "Time between iterations (milliseconds): ";
+                    std::cin >> timeSleep;
+                    std::cout << std::endl;
+
+                    sortController.setTimeSleep(timeSleep);
+                    break;
+
                 default:
                     break;
                 }
@@ -91,6 +118,7 @@ int main()
         int index = 0;
         for (auto sortable : sortController.sortElements) {
             sf::RectangleShape shape = sortable.shape();
+            shape.setFillColor(sortable.color);
             shape.setPosition(sf::Vector2f(sortable.width * index++, sortController.winHeight - sortable.height));
             window.draw(shape);
         }

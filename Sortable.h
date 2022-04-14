@@ -5,7 +5,7 @@
 class Sortable
 {
 public:
-	sf::Color color = sf::Color::White;
+	sf::Color color = sf::Color::White; // white 42...95, red: 42...35
 	int value;
 	float width, height;
 

@@ -2,6 +2,8 @@
 #include <vector>
 #include <algorithm>
 #include <random>
+#include <SFML/System.hpp>
+
 #include "Sortable.h"
 #include "SortAlgorithms.h"
 
@@ -15,11 +17,16 @@ public:
 	std::vector<Sortable> sortElements;
 
 	SortController(sf::Vector2u windowSize, int timeSleep);
+
+	// Vector control methods
 	void clear();
 	void populate(int numOfElements);
-	void startSort(int sortType);
 	void randomize();
-	bool isSorted();
+	void setTimeSleep(int t);
+
+	// Sorting methods
+	void startSort(int sortType);
 	void checkSort();
+	bool isSorted();
 };
 

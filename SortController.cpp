@@ -1,4 +1,6 @@
 #include "SortController.h"
+#include <iostream>
+#include <SFML/System.hpp>
 
 SortController::SortController(sf::Vector2u windowSize, int timeSleep) {
 	this->winWidth = windowSize.x;
@@ -7,30 +9,21 @@ SortController::SortController(sf::Vector2u windowSize, int timeSleep) {
 	this->timeSleep = timeSleep;
 }
 
+///////////////////////////////
+//
+// Vector control methods
+//
+///////////////////////////////
+
 void SortController::clear() {
 	sortElements.clear();
 }
 
 void SortController::populate(int numOfElements) {
 	for (int n = 0; n < numOfElements; n++) {
-		std::cout << (winWidth / numOfElements) << std::endl;
 		Sortable sortable(((float)winWidth / numOfElements), ((float)winHeight / numOfElements) * (n+1), n); // Width defined to space max space in window, height defined by Sortable value
 		sortElements.push_back(sortable);
 	}
-}
-
-void SortController::startSort(int sortType) {
-	std::cout << "Sort started via thread!" << std::endl;
-	isSorting = true;
-	while (!isSorted())
-	{
-		if (sortType == 0) {
-			algo::bubbleSort(sortElements, timeSleep);
-		}
-	}
-	isSorting = false;
-	std::cout << "Sorting finished!" << std::endl;
-	std::cout << std::endl;
 }
 
 void SortController::randomize() {
@@ -38,6 +31,31 @@ void SortController::randomize() {
 	auto rng = std::default_random_engine{ rd() };
 	std::shuffle(std::begin(sortElements), std::end(sortElements), rng);
 };
+
+void SortController::setTimeSleep(int t) {
+	timeSleep = t;
+}
+
+///////////////////////////////
+//
+// Sorting methods
+//
+///////////////////////////////
+
+void SortController::startSort(int sortType) {
+	isSorting = true;
+	sf::Clock timeSort;
+	while (!isSorted())
+	{
+		if (sortType == 0) {
+			algo::bubbleSort(sortElements, timeSleep);
+		}
+	}
+
+	std::cout << timeSort.getElapsedTime().asMilliseconds() << std::endl;
+	checkSort();
+	isSorting = false;
+}
 
 bool SortController::isSorted() {
 	for (int n = 0; n < sortElements.size()-1; n++) {
@@ -50,6 +68,10 @@ bool SortController::isSorted() {
 	return true;
 };
 
+// This function is only for the "checking animation", at this point, the vector is 100% sorted, verified by isSorted()
 void SortController::checkSort() {
-
+	for (int n = 0; n < sortElements.size(); n++) {
+		sortElements[n].color = sf::Color::Green;
+		sf::sleep(sf::milliseconds(timeSleep));
+	}
 };
