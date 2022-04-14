@@ -5,7 +5,6 @@
 
 namespace algo {
 	void bubbleSort(std::vector<Sortable>& sortElements, int timeSleep) {
-		int currValue, tempValue;
 
 		for (int n = 0; n < sortElements.size() - 1; n++) {
 
@@ -23,11 +22,11 @@ namespace algo {
 				sortElements[n].color = sf::Color::Red;
 				sortElements[n+1].color = sf::Color::Red;
 
-				// Swap value
-				currValue = sortElements[n].value;
-				tempValue = sortElements[n + 1].value;
-				sortElements[n + 1].value = currValue;
-				sortElements[n].value = tempValue;
+				// Swap positions
+				auto currElement = sortElements[n];
+				auto tempElement = sortElements[n + 1];
+				sortElements[n + 1] = currElement;
+				sortElements[n] = tempElement;
 
 				// Reset color
 				sortElements[n].color = sf::Color::White;

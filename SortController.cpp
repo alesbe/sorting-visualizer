@@ -19,12 +19,15 @@ void SortController::populate(int numOfElements) {
 }
 
 void SortController::startSort(int sortType) {
+	std::cout << "Sort started via thread!" << std::endl;
 	while (!isSorted())
 	{
 		if (sortType == 0) {
 			algo::bubbleSort(sortElements, timeSleep);
 		}
 	}
+	std::cout << "Sorting finished!" << std::endl;
+	std::cout << std::endl;
 }
 
 void SortController::randomize() {

@@ -18,7 +18,7 @@ int main()
     sf::RenderWindow window(sf::VideoMode(600, 400), "Sorting visualizer v0.1-alpha");
 
     int numOfElements = 10;
-    int timeSleep = 50;
+    int timeSleep = 1;
     int sortType = 0;
 
     std::thread sortingThread;
@@ -42,7 +42,7 @@ int main()
                         std::cout << "Randomizing..." << std::endl;
                         sortController.randomize();
 
-                        sortingThread = std::thread(&SortController::startSort, sortController, sortType);
+                        sortingThread = std::thread(&SortController::startSort, &sortController, sortType);
                         sortingThread.detach();
                     }
 
@@ -89,15 +89,11 @@ int main()
 
         // Draw sortables
         int index = 0;
-        std::cout << "{ ";
-        for (Sortable sortable : sortController.sortElements) {
-            std::cout << "[" << sortable.value << ", " << index << "], ";
-
+        for (auto sortable : sortController.sortElements) {
             sf::RectangleShape shape = sortable.shape();
             shape.setPosition(sf::Vector2f(sortable.width * index++, sortController.winHeight - sortable.height));
             window.draw(shape);
         }
-        std::cout << " }" << std::endl;
 
         window.display();
     }
