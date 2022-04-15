@@ -15,14 +15,15 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode(600, 400), "Sorting visualizer v0.2-alpha");
 
-    int numOfElements = 50;
+    // Configs
+    int numOfElements = 150;
     int timeSleep = 1; // milliseconds
     int sortType = 0;
 
     std::thread sortingThread;
 
     SortController sortController(window.getSize(), timeSleep);
-    
+
     sortController.populate(numOfElements);
     while (window.isOpen())
     {

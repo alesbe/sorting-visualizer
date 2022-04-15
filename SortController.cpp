@@ -47,8 +47,17 @@ void SortController::startSort(int sortType) {
 	sf::Clock timeSort;
 	while (!isSorted())
 	{
-		if (sortType == 0) {
+
+		switch (sortType)
+		{
+		case 0:
 			algo::bubbleSort(sortElements, timeSleep);
+			break;
+		case 1:
+			algo::selectionSort(sortElements, timeSleep);
+			break;
+		default:
+			break;
 		}
 	}
 
