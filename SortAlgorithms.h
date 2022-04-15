@@ -8,5 +8,5 @@ namespace algo {
 }
 
 namespace algoUtils {
-	void swap(std::vector<Sortable>& sortElements, int timeSleep, Sortable& num1, Sortable& num2);
+	void swap(std::vector<Sortable>& sortElements, int timeSleep, Sortable& el1, Sortable& el2);
 }

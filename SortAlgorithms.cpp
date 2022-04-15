@@ -18,19 +18,19 @@ void algo::selectionSort(std::vector<Sortable>& sortElements, int timeSleep) {
 	}
 }
 
-void algoUtils::swap(std::vector<Sortable>& sortElements, int timeSleep, Sortable& num1, Sortable& num2) {
-	num1.color = sf::Color::Red;
-	num2.color = sf::Color::Red;
+void algoUtils::swap(std::vector<Sortable>& sortElements, int timeSleep, Sortable& el1, Sortable& el2) {
+	el1.color = sf::Color::Red;
+	el2.color = sf::Color::Red;
 
 	// Swap positions
-	auto currElement = num1;
-	auto tempElement = num2;
-	num1 = tempElement;
-	num2 = currElement;
+	auto currElement = el1;
+	auto tempElement = el2;
+	el1 = tempElement;
+	el2 = currElement;
 
 	// Wait timeSleep ms between iterations
 	sf::sleep(sf::milliseconds(timeSleep));
 
-	num1.color = sf::Color::White;
-	num2.color = sf::Color::White;
+	el1.color = sf::Color::White;
+	el2.color = sf::Color::White;
 }
