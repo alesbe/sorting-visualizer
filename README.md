@@ -30,4 +30,4 @@ A lightweight sorting visualizer made with C++ and [SFML](https://www.sfml-dev.o
 - Compile the code yourself (if you have any SFML library related issue, follow [this](https://www.sfml-dev.org/tutorials/2.5/) guide).
 
 ## License 📜
-[MPL 2.0 License](https://www.mozilla.org/en-US/MPL/2.0/)
+[MPL 2.0 License](https://github.com/alesbe/sorting-visualizer/blob/main/LICENSE)
