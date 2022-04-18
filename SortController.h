@@ -1,7 +1,14 @@
 #pragma once
+#ifdef _WIN32
+#define CLEAR "cls"
+#else
+#define CLEAR "clear"
+#endif
+
 #include <vector>
 #include <algorithm>
 #include <random>
+#include <iostream>
 #include <SFML/System.hpp>
 
 #include "Sortable.h"
@@ -23,10 +30,11 @@ public:
 	void populate(int numOfElements);
 	void randomize();
 	void setTimeSleep(int t);
+	void displaySortInfo(int sortType, bool isSorting, int numOfComparisons, int sortTime);
 
 	// Sorting methods
 	void startSort(int sortType);
-	void checkSort();
+	void checkSortAnim();
 	bool isSorted();
 };
 

@@ -159,11 +159,13 @@
     <ClCompile Include="Sortable.cpp" />
     <ClCompile Include="SortAlgorithms.cpp" />
     <ClCompile Include="SortController.cpp" />
+    <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sortable.h" />
     <ClInclude Include="SortAlgorithms.h" />
     <ClInclude Include="SortController.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

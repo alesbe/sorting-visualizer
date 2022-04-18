@@ -3,8 +3,9 @@
 #include "Sortable.h"
 
 namespace algo {
-	void bubbleSort(std::vector<Sortable>& sortElements, int timeSleep);
-	void selectionSort(std::vector<Sortable>& sortElements, int timeSleep);
+	int bubbleSort(std::vector<Sortable>& sortElements, int timeSleep);
+	int selectionSort(std::vector<Sortable>& sortElements, int timeSleep);
+	int insertionSort(std::vector<Sortable>& sortElements, int timeSleep);
 }
 
 namespace algoUtils {

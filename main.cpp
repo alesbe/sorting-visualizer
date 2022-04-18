@@ -1,30 +1,46 @@
 /*
-- Sort Types -
-0: Bubble Sort
-1: ...
+Sorting visualizer v1.0 (static version) - by alesbe
 
-Due to the 1ms resolution of timers on Windows, the speed scale is smaller. The Linux version has a higher time resoltion < 1ms!
+Description: A program made with C++ and SFML to visualize sorting algorithms.
+
+License:
+MPL 2.0 (https://www.mozilla.org/en-US/MPL/2.0/)
+
+Known issues:
+- Due to the 1ms resolution of timers on Windows, the time between iterations in the sorting process can't be configured under 1ms.
+- When trying to load a not defined sort type the program will not respond
+
+github.com/alesbe/sorting-visualizer
 */
+#ifdef _WIN32
+#define CLEAR "cls"
+#else
+#define CLEAR "clear"
+#endif
 
-#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <thread>
+#include <SFML/Graphics.hpp>
 #include "SortController.h"
+#include "Utils.h"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(600, 400), "Sorting visualizer v0.2-alpha");
+    // Window
+    sf::RenderWindow window(sf::VideoMode(600, 400), "Sorting visualizer v1.0");
 
-    // Configs
+    // Configs (can be changed in runtime)
     int numOfElements = 150;
-    int timeSleep = 1; // milliseconds
+    int timeSleep = 1;
     int sortType = 0;
+
+    // Initializations
+    SortController sortController(window.getSize(), timeSleep);
+    sortController.populate(numOfElements);
 
     std::thread sortingThread;
 
-    SortController sortController(window.getSize(), timeSleep);
-
-    sortController.populate(numOfElements);
+    // Main loop
     while (window.isOpen())
     {
         sf::Event event;
@@ -35,14 +51,14 @@ int main()
                 switch (event.key.code)
                 {
 
-                // Randomize and start sorting
+                // Start sort
                 case sf::Keyboard::Space:
                     if (!sortController.isSorting) {
-                        std::cout << "Starting sort!" << std::endl;
                         sortController.clear();
                         sortController.populate(numOfElements);
                         sortController.randomize();
 
+                        // Move sorting to a different thread (main thread will be drawing and can't be blocked)
                         sortingThread = std::thread(&SortController::startSort, &sortController, sortType);
                         sortingThread.detach();
                     }
@@ -51,6 +67,7 @@ int main()
                 // Stop sort
                 case sf::Keyboard::Backspace:
                     if (sortController.isSorting) {
+                        system(CLEAR);
                         std::cout << "Sort stopped!" << std::endl;
                         sortController.clear();
                         sortController.populate(numOfElements);
@@ -59,35 +76,26 @@ int main()
 
                 // Change sort type (increase)
                 case sf::Keyboard::Up:
-                    sortType++;
-                    std::cout << "Sort changed to: " << sortType << std::endl;
+                    if (sortType >= 0) {
+                        sortType++;
+                        system(CLEAR);
+                        std::cout << "Sort changed to: " << Utils::getSortType(sortType) << std::endl;
+                    }
                     break;
 
                 // Change sort type (decrease)
                 case sf::Keyboard::Down:
-                    sortType--;
-                    std::cout << "Sort changed to: " << sortType << std::endl;
+                    if (sortType > 0) {
+                        sortType--;
+                        system(CLEAR);
+                        std::cout << "Sort changed to: " << Utils::getSortType(sortType) << std::endl;
+                    }
                     break;
 
-                // Change number of sortables (increase)
-                case sf::Keyboard::Right:
-                    numOfElements++;
-                    sortController.clear();
-                    sortController.populate(numOfElements);
-                    std::cout << "Num of elements changed to: " << numOfElements << std::endl;
-                    break;
-
-                // Change number of sortables (decrease)
-                case sf::Keyboard::Left:
-                    numOfElements--;
-                    sortController.clear();
-                    sortController.populate(numOfElements);
-                    std::cout << "Num of elements changed to: " << numOfElements << std::endl;
-                    break;
-
-                // Change number of sortables through console
+                // Change number of elements
                 case sf::Keyboard::F1:
-                    std::cout << "Number of sortables: ";
+                    system(CLEAR);
+                    std::cout << "Number of elements: ";
                     std::cin >> numOfElements;
                     std::cout << std::endl;
 
@@ -95,9 +103,10 @@ int main()
                     sortController.populate(numOfElements);
                     break;
 
-                // Change time between iterations
+                // Change time between comparisons
                 case sf::Keyboard::F2:
-                    std::cout << "Time between iterations (milliseconds): ";
+                    system(CLEAR);
+                    std::cout << "Time between comparisons (milliseconds): ";
                     std::cin >> timeSleep;
                     std::cout << std::endl;
 
@@ -115,7 +124,7 @@ int main()
 
         window.clear(sf::Color::Black);
 
-        // Draw sortables
+        // Draw elements
         int index = 0;
         for (auto sortable : sortController.sortElements) {
             sf::RectangleShape shape = sortable.shape();
