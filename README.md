@@ -8,6 +8,9 @@ A lightweight sorting visualizer made with C++ and [SFML](https://www.sfml-dev.o
 ![Bubble sort info](https://i.imgur.com/lZL6G0a.png) <br>
 *Sort info*
 
+## Wiki 📖
+If you want to contibute or understand the code better, go to the Wiki tab or press [here](https://github.com/alesbe/sorting-visualizer/wiki/Index)!
+
 ## Sort types 🗂️
 - Bubble sort
 - Selection sort
