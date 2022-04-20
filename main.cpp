@@ -1,16 +1,12 @@
 /*
 Sorting visualizer v1.0 (static version) - by alesbe
-
 Description: A program made with C++ and SFML to visualize sorting algorithms.
 
 License: MIT [alesbe 2022]
 
-Known issues:
-- Due to the 1ms resolution of timers on Windows, the time between iterations in the sorting process can't be configured under 1ms.
-- When trying to load a not defined sort type the program will not respond
-
 github.com/alesbe/sorting-visualizer
 */
+
 #ifdef _WIN32
 #define CLEAR "cls"
 #else
