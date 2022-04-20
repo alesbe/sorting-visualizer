@@ -3,8 +3,7 @@ Sorting visualizer v1.0 (static version) - by alesbe
 
 Description: A program made with C++ and SFML to visualize sorting algorithms.
 
-License:
-MPL 2.0 (https://www.mozilla.org/en-US/MPL/2.0/)
+License: MIT [alesbe 2022]
 
 Known issues:
 - Due to the 1ms resolution of timers on Windows, the time between iterations in the sorting process can't be configured under 1ms.
