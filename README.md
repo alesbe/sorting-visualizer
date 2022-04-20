@@ -29,7 +29,7 @@ If you want to contibute or understand the code better, go to the Wiki tab or pr
 ## Download 🖨️
 - Download pre-compiled exe from [Releases](https://github.com/alesbe/sorting-visualizer/releases). <br>
 **Note: The libraries are static, so they are all included in a single exe, some browsers may detect this as a possible threat, feel free to compile it yourself instead of downloading the pre-compiled exe!**
-- Compile the code yourself (if you have any SFML library related issue, follow [this](https://www.sfml-dev.org/tutorials/2.5/) guide).
+- Compile the code yourself (You'll need the SFML library, follow [this](https://www.sfml-dev.org/tutorials/2.5/) guide).
 
 ## License 📜
 [MPL 2.0 License](https://github.com/alesbe/sorting-visualizer/blob/main/LICENSE)
