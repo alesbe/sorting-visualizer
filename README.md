@@ -32,4 +32,4 @@ If you want to contibute or understand the code better, go to the Wiki tab or pr
 - Compile the code yourself (You'll need the SFML library, follow [this](https://www.sfml-dev.org/tutorials/2.5/) guide).
 
 ## License 📜
-[MITLicense](https://github.com/alesbe/sorting-visualizer/blob/main/LICENSE)
+[MIT License](https://github.com/alesbe/sorting-visualizer/blob/main/LICENSE)
