@@ -17,6 +17,7 @@ If you want to contibute or understand the code better, go to the Wiki tab or pr
 - Insertion sort
 
 ## Usage 🕹️
+**h**: Display help
 **F1**: Change number of elements <br>
 **F2**: Change time between comparisons <br>
 **Arrow Up / Arrow down**: Change sort type <br>
@@ -29,7 +30,9 @@ If you want to contibute or understand the code better, go to the Wiki tab or pr
 ## Download 🖨️
 - Download pre-compiled exe from [Releases](https://github.com/alesbe/sorting-visualizer/releases). <br>
 **Note: The libraries are static, so they are all included in a single exe, some browsers may detect this as a possible threat, feel free to compile it yourself instead of downloading the pre-compiled exe!**
-- Compile the code yourself (You'll need the SFML library, follow [this](https://www.sfml-dev.org/tutorials/2.5/) guide).
+
+or
+- Compile the code yourself (Follow [this](https://github.com/alesbe/sorting-visualizer/wiki/How-to-compile-compile-the-project) guide).
 
 ## License 📜
 [MIT License](https://github.com/alesbe/sorting-visualizer/blob/main/LICENSE)
