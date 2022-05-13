@@ -69,6 +69,16 @@ int main()
                     }
                     break;
 
+                // Display help
+                case sf::Keyboard::H:
+                    system(CLEAR);
+                    std::cout << "[Space]: Start sort" << std::endl;
+                    std::cout << "[Backspace]: Stop sort" << std::endl;
+                    std::cout << "[Up/Down Arrows]: Change sort type" << std::endl;
+                    std::cout << "[F1]: Change number of elements" << std::endl;
+                    std::cout << "[F2]: Change time between comparisons" << std::endl;
+                    break;
+
                 // Change sort type (increase)
                 case sf::Keyboard::Up:
                     if (sortType >= 0) {
