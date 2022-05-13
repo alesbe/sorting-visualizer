@@ -23,6 +23,7 @@ int main()
 {
     // Window
     sf::RenderWindow window(sf::VideoMode(600, 400), "Sorting visualizer v1.0");
+    window.setFramerateLimit(60);
 
     // Configs (can be changed in runtime)
     int numOfElements = 150;
@@ -81,7 +82,7 @@ int main()
 
                 // Change sort type (increase)
                 case sf::Keyboard::Up:
-                    if (sortType >= 0) {
+                    if (sortType >= 0 && Utils::hasNextSortType(sortType)) {
                         sortType++;
                         system(CLEAR);
                         std::cout << "Sort changed to: " << Utils::getSortType(sortType) << std::endl;

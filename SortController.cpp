@@ -77,6 +77,9 @@ void SortController::startSort(int sortType) {
 		case 2:
 			numOfComparisons += algo::insertionSort(sortElements, timeSleep);
 			break;
+        case 3:
+            numOfComparisons += algo::quickSort(sortElements, timeSleep);
+            break;
 		default:
 			return;
 		}

@@ -1,5 +1,7 @@
 #include "Utils.h"
 
+const std::string kNoSort = "<NO ALGORITHM>";
+
 std::string Utils::getSortType(int sortType) {
 	switch (sortType)
 	{
@@ -12,7 +14,14 @@ std::string Utils::getSortType(int sortType) {
 	case 2:
 		return "Insertion sort";
 
+    case 3:
+        return "Quick sort";
+
 	default:
-		return std::to_string(sortType);
+        return kNoSort;
 	}
+}
+
+bool Utils::hasNextSortType(int sortType) {
+    return getSortType(sortType + 1) != kNoSort;
 }

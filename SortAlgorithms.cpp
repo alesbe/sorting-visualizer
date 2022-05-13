@@ -1,5 +1,11 @@
 #include "SortAlgorithms.h"
 
+#include <tuple>
+
+using SortableIterator = std::vector<Sortable>::iterator;
+using std::tuple;
+static int quickSortHelper(std::vector<Sortable>& parent, SortableIterator beg, SortableIterator end, int timeSleep);
+
 int algo::bubbleSort(std::vector<Sortable>& sortElements, int timeSleep) {
 	int numOfComparisons = 0;
 
@@ -57,6 +63,10 @@ int algo::insertionSort(std::vector<Sortable>& sortElements, int timeSleep) {
 	return numOfComparisons;
 }
 
+int algo::quickSort(std::vector<Sortable>& sortElements, int timeSleep) {
+    return quickSortHelper(sortElements, sortElements.begin(), sortElements.end(), timeSleep);
+}
+
 void algoUtils::swap(std::vector<Sortable>& sortElements, int timeSleep, Sortable& el1, Sortable& el2) {
 	el1.color = sf::Color::Red;
 	el2.color = sf::Color::Red;
@@ -70,4 +80,46 @@ void algoUtils::swap(std::vector<Sortable>& sortElements, int timeSleep, Sortabl
 
 	el1.color = sf::Color::White;
 	el2.color = sf::Color::White;
+}
+
+/// QuickSort Partition step. Iterators follow STL style for ranges.
+///
+/// @param parent The parent array, needed for the swap utilities.
+/// @param beg First element of the sub array
+/// @param end "One past the last" element of the sub array
+/// @param timeSleep pauses the thread for this many ms
+/// @return tuple, first is the pivot, second is the number of comparisons
+static tuple<SortableIterator, int>
+    quickSortPartition(std::vector<Sortable>& parent,
+                       SortableIterator beg, SortableIterator end, int timeSleep);
+
+static int quickSortHelper(std::vector<Sortable>& parent, SortableIterator beg, SortableIterator end, int timeSleep) {
+    // base case
+    if (end - beg < 2) return 0;
+
+    auto [pivot, numOfComparisons] = quickSortPartition(parent, beg, end, timeSleep);
+    return numOfComparisons +
+        quickSortHelper(parent, beg, pivot, timeSleep) +
+        quickSortHelper(parent, pivot + 1, end, timeSleep);
+
+}
+
+static tuple<SortableIterator, int>
+    quickSortPartition(
+        std::vector<Sortable>& parent,
+        SortableIterator beg, SortableIterator end, int timeSleep)
+{
+    auto pivot = end - 1;
+    int numOfComparisons = 0;
+
+    auto lhs = beg;
+    for (auto rhs = lhs; rhs != pivot; ++rhs) {
+        ++numOfComparisons;
+        if (rhs->value <= pivot->value) {
+            algoUtils::swap(parent, timeSleep, *lhs, *rhs);
+            ++lhs;
+        }
+    }
+    algoUtils::swap(parent, timeSleep, *lhs, *pivot);
+    return tuple{lhs, numOfComparisons};
 }
