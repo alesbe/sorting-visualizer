@@ -17,7 +17,7 @@ If you want to contibute or understand the code better, go to the Wiki tab or pr
 - Insertion sort
 
 ## Usage 🕹️
-**h**: Display help
+**h**: Display help <br>
 **F1**: Change number of elements <br>
 **F2**: Change time between comparisons <br>
 **Arrow Up / Arrow down**: Change sort type <br>
