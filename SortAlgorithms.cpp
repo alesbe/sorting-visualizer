@@ -6,6 +6,13 @@ using SortableIterator = std::vector<Sortable>::iterator;
 using std::tuple;
 static int quickSortHelper(std::vector<Sortable>& parent, SortableIterator beg, SortableIterator end, int timeSleep);
 
+///
+/// Bubble sort algorithm
+///
+/// @param sortElements Main array containing the elements to be sorted
+/// @param timeSleep Time to wait between iterations in miliseconds
+/// @return Number of comparisons made
+///
 int algo::bubbleSort(std::vector<Sortable>& sortElements, int timeSleep) {
 	int numOfComparisons = 0;
 
@@ -19,6 +26,13 @@ int algo::bubbleSort(std::vector<Sortable>& sortElements, int timeSleep) {
 	return numOfComparisons;
 }
 
+///
+/// Selection sort
+///
+/// @param sortElements Main array containing the elements to be sorted
+/// @param timeSleep Time to wait between iterations in miliseconds
+/// @return Number of comparisons made
+///
 int algo::selectionSort(std::vector<Sortable>& sortElements, int timeSleep) {
 	int numOfComparisons = 0;
 
@@ -35,6 +49,13 @@ int algo::selectionSort(std::vector<Sortable>& sortElements, int timeSleep) {
 	return numOfComparisons;
 }
 
+///
+/// Insertion sort
+///
+/// @param sortElements Main array containing the elements to be sorted
+/// @param timeSleep Time to wait between iterations in miliseconds
+/// @return Number of comparisons made
+///
 int algo::insertionSort(std::vector<Sortable>& sortElements, int timeSleep) {
 	int numOfComparisons = 0;
 
@@ -63,6 +84,7 @@ int algo::insertionSort(std::vector<Sortable>& sortElements, int timeSleep) {
 	return numOfComparisons;
 }
 
+///
 /// QuickSort Partition step. Iterators follow STL style for ranges.
 ///
 /// @param parent The parent array, needed for the swap utilities.
@@ -70,6 +92,7 @@ int algo::insertionSort(std::vector<Sortable>& sortElements, int timeSleep) {
 /// @param end "One past the last" element of the sub array
 /// @param timeSleep pauses the thread for this many ms
 /// @return tuple, first is the pivot, second is the number of comparisons
+///
 static tuple<SortableIterator, int> quickSortPartition(std::vector<Sortable>& parent,
                        SortableIterator beg, SortableIterator end, int timeSleep);
 
