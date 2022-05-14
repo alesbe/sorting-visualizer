@@ -26,11 +26,12 @@ If you want to contibute or understand the code better, go to the Wiki tab or pr
 **Backspace**: Stop sort
 
 ## Download 🖨️
-- Download pre-compiled exe from [Releases](https://github.com/alesbe/sorting-visualizer/releases). <br>
+- Pre-compiled .exe (windows) [Releases](https://github.com/alesbe/sorting-visualizer/releases). <br>
 **Note: The libraries are static, so they are all included in a single exe, some browsers may detect this as a possible threat, feel free to compile it yourself instead of downloading the pre-compiled exe!**
 
 or
-- Compile the code yourself (Follow [this](https://github.com/alesbe/sorting-visualizer/wiki/How-to-compile-compile-the-project) guide).
+
+- Compile the code yourself (linux/macos) (Follow [this](https://github.com/alesbe/sorting-visualizer/wiki/How-to-compile-compile-the-project) guide).
 
 ## License 📜
 [MIT License](https://github.com/alesbe/sorting-visualizer/blob/main/LICENSE)
