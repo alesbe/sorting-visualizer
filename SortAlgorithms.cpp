@@ -4,7 +4,6 @@
 
 using SortableIterator = std::vector<Sortable>::iterator;
 using std::tuple;
-static int quickSortHelper(std::vector<Sortable>& parent, SortableIterator beg, SortableIterator end, int timeSleep);
 
 ///
 /// Bubble sort algorithm
@@ -93,8 +92,8 @@ int algo::insertionSort(std::vector<Sortable>& sortElements, int timeSleep) {
 /// @param timeSleep pauses the thread for this many ms
 /// @return tuple, first is the pivot, second is the number of comparisons
 ///
-static tuple<SortableIterator, int> quickSortPartition(std::vector<Sortable>& parent,
-                       SortableIterator beg, SortableIterator end, int timeSleep);
+static int quickSortHelper(std::vector<Sortable>& parent, SortableIterator beg, SortableIterator end, int timeSleep);
+static tuple<SortableIterator, int> quickSortPartition(std::vector<Sortable>& parent, SortableIterator beg, SortableIterator end, int timeSleep);
 
 static int quickSortHelper(std::vector<Sortable>& parent, SortableIterator beg, SortableIterator end, int timeSleep) {
     // base case
@@ -107,11 +106,7 @@ static int quickSortHelper(std::vector<Sortable>& parent, SortableIterator beg, 
 
 }
 
-static tuple<SortableIterator, int>
-    quickSortPartition(
-        std::vector<Sortable>& parent,
-        SortableIterator beg, SortableIterator end, int timeSleep)
-{
+static tuple<SortableIterator, int> quickSortPartition( std::vector<Sortable>& parent, SortableIterator beg, SortableIterator end, int timeSleep) {
     auto pivot = end - 1;
     int numOfComparisons = 0;
 
