@@ -63,25 +63,6 @@ int algo::insertionSort(std::vector<Sortable>& sortElements, int timeSleep) {
 	return numOfComparisons;
 }
 
-int algo::quickSort(std::vector<Sortable>& sortElements, int timeSleep) {
-    return quickSortHelper(sortElements, sortElements.begin(), sortElements.end(), timeSleep);
-}
-
-void algoUtils::swap(std::vector<Sortable>& sortElements, int timeSleep, Sortable& el1, Sortable& el2) {
-	el1.color = sf::Color::Red;
-	el2.color = sf::Color::Red;
-
-	auto currElement = el1;
-	auto tempElement = el2;
-	el1 = tempElement;
-	el2 = currElement;
-
-	sf::sleep(sf::milliseconds(timeSleep));
-
-	el1.color = sf::Color::White;
-	el2.color = sf::Color::White;
-}
-
 /// QuickSort Partition step. Iterators follow STL style for ranges.
 ///
 /// @param parent The parent array, needed for the swap utilities.
@@ -89,8 +70,7 @@ void algoUtils::swap(std::vector<Sortable>& sortElements, int timeSleep, Sortabl
 /// @param end "One past the last" element of the sub array
 /// @param timeSleep pauses the thread for this many ms
 /// @return tuple, first is the pivot, second is the number of comparisons
-static tuple<SortableIterator, int>
-    quickSortPartition(std::vector<Sortable>& parent,
+static tuple<SortableIterator, int> quickSortPartition(std::vector<Sortable>& parent,
                        SortableIterator beg, SortableIterator end, int timeSleep);
 
 static int quickSortHelper(std::vector<Sortable>& parent, SortableIterator beg, SortableIterator end, int timeSleep) {
@@ -122,4 +102,27 @@ static tuple<SortableIterator, int>
     }
     algoUtils::swap(parent, timeSleep, *lhs, *pivot);
     return tuple{lhs, numOfComparisons};
+}
+
+int algo::quickSort(std::vector<Sortable>& sortElements, int timeSleep) {
+    return quickSortHelper(sortElements, sortElements.begin(), sortElements.end(), timeSleep);
+}
+
+///
+/// UTILITY FUNCTIONS
+///
+
+void algoUtils::swap(std::vector<Sortable>& sortElements, int timeSleep, Sortable& el1, Sortable& el2) {
+	el1.color = sf::Color::Red;
+	el2.color = sf::Color::Red;
+
+	auto currElement = el1;
+	auto tempElement = el2;
+	el1 = tempElement;
+	el2 = currElement;
+
+	sf::sleep(sf::milliseconds(timeSleep));
+
+	el1.color = sf::Color::White;
+	el2.color = sf::Color::White;
 }
