@@ -15,6 +15,7 @@ If you want to contibute or understand the code better, go to the Wiki tab or pr
 - Bubble sort
 - Selection sort
 - Insertion sort
+- Quick sort
 
 ## Usage 🕹️
 **h**: Display help <br>
@@ -23,9 +24,6 @@ If you want to contibute or understand the code better, go to the Wiki tab or pr
 **Arrow Up / Arrow down**: Change sort type <br>
 **Space**: Start sort <br>
 **Backspace**: Stop sort
-
-## Known issues ❗
-- Program stops when a non existing sort type tries to be loaded
 
 ## Download 🖨️
 - Download pre-compiled exe from [Releases](https://github.com/alesbe/sorting-visualizer/releases). <br>
