@@ -67,7 +67,7 @@ void SortController::setTimeSleep(int t) {
  * @param numOfComparisons Number of comparisons that the algorithm running made
  * @param sortTime Time that the algorithm took to sort all elements
  * 
- * TODO: Add number of comparisons and time while the algorithm is sorting
+ * 
  */
 void SortController::displaySortInfo(int sortType, bool isSorting, int numOfComparisons, int sortTime) {
 	system(CLEAR);
