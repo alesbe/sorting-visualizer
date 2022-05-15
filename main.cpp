@@ -25,7 +25,8 @@ int main()
     sf::RenderWindow window(sf::VideoMode(600, 400), "Sorting visualizer v1.0");
     window.setFramerateLimit(60);
 
-    // Configs (can be changed in runtime)
+    // Configs (can be changed in runtime)q
+    bool isConfigToggled = false;
     int numOfElements = 150;
     int timeSleep = 1;
     int sortType = 0;
@@ -67,6 +68,20 @@ int main()
                         std::cout << "Sort stopped!" << std::endl;
                         sortController.clear();
                         sortController.populate(numOfElements);
+                    }
+                    break;
+
+                // Dialog
+                case sf::Keyboard::F3:
+                    // Dialog is closed
+                    if(!isConfigToggled) {
+                        // Open dialog
+                        isConfigToggled = true;
+
+                    // Dialog is oppened
+                    } else {
+                        // Close dialog
+                        isConfigToggled = false;
                     }
                     break;
 
@@ -137,6 +152,25 @@ int main()
             shape.setFillColor(sortable.color);
             shape.setPosition(sf::Vector2f(sortable.width * index++, sortController.winHeight - sortable.height));
             window.draw(shape);
+        }
+
+        // Draw dialog
+        if(isConfigToggled) {
+            // Load font
+            sf::Font dialogFont;
+            if (!dialogFont.loadFromFile("font.ttf"))
+            {
+                std::cout << "Couldn't load font!";
+            }
+
+            // Draw text
+            sf::Text helpText;
+
+            helpText.setString("This is the config dialog");
+            helpText.setFont(dialogFont);
+            helpText.setCharacterSize(sortController.winWidth / 40);
+
+            window.draw(helpText);
         }
 
         window.display();
