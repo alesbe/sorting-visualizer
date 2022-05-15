@@ -1,3 +1,8 @@
+#
+# ! Atention !
+# This Makefile only compiles and cleans the executable, but does not include any libraries, You'll need to manually install SFML libraries for now!
+#
+
 # SFML Libs
 SFML_DIR=./libs/SFML
 LIBDIR=$(SFML_DIR)/lib
