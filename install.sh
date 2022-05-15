@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 compile() {
-	# Compile and clean
+	# Compile and clean using Makefile
 	echo Compiling visualizer...
 	make
 }
@@ -31,7 +31,7 @@ main() {
 		# Move executable to /usr/bin
 		echo Moving executable into /usr/bin...
 		mv ./sorting-visualizer /usr/bin
-		echo Done! Run sorting-visualizer to open it
+		echo Done!
 		exit
 	fi
 }
