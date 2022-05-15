@@ -5,13 +5,19 @@
 using SortableIterator = std::vector<Sortable>::iterator;
 using std::tuple;
 
-///
-/// Bubble sort algorithm
-///
-/// @param sortElements Main array containing the elements to be sorted
-/// @param timeSleep Time to wait between iterations in miliseconds
-/// @return Number of comparisons made
-///
+//
+// ────────────────────────────────────────────────────────────────────── I ──────────
+//   :::::: S O R T   A L G O R I T H M S : :  :   :    :     :        :          :
+// ────────────────────────────────────────────────────────────────────────────────
+//
+
+/**
+ * @brief Bubble sort
+ * 
+ * @param sortElements Main array containing the elements to be sorted
+ * @param timeSleep Time to wait between iterations in miliseconds
+ * @return Number of comparisons made
+ */
 int algo::bubbleSort(std::vector<Sortable>& sortElements, int timeSleep) {
 	int numOfComparisons = 0;
 
@@ -25,13 +31,13 @@ int algo::bubbleSort(std::vector<Sortable>& sortElements, int timeSleep) {
 	return numOfComparisons;
 }
 
-///
-/// Selection sort
-///
-/// @param sortElements Main array containing the elements to be sorted
-/// @param timeSleep Time to wait between iterations in miliseconds
-/// @return Number of comparisons made
-///
+/**
+ * @brief Selection sort
+ * 
+ * @param sortElements Main array containing the elements to be sorted
+ * @param timeSleep Time to wait between iterations in miliseconds
+ * @return Number of comparisons made
+ */
 int algo::selectionSort(std::vector<Sortable>& sortElements, int timeSleep) {
 	int numOfComparisons = 0;
 
@@ -48,13 +54,13 @@ int algo::selectionSort(std::vector<Sortable>& sortElements, int timeSleep) {
 	return numOfComparisons;
 }
 
-///
-/// Insertion sort
-///
-/// @param sortElements Main array containing the elements to be sorted
-/// @param timeSleep Time to wait between iterations in miliseconds
-/// @return Number of comparisons made
-///
+/**
+ * @brief Insertion sort
+ * 
+ * @param sortElements Main array containing the elements to be sorted
+ * @param timeSleep Time to wait between iterations in miliseconds
+ * @return Number of comparisons made
+ */
 int algo::insertionSort(std::vector<Sortable>& sortElements, int timeSleep) {
 	int numOfComparisons = 0;
 
@@ -83,15 +89,15 @@ int algo::insertionSort(std::vector<Sortable>& sortElements, int timeSleep) {
 	return numOfComparisons;
 }
 
-///
-/// QuickSort Partition step. Iterators follow STL style for ranges.
-///
-/// @param parent The parent array, needed for the swap utilities.
-/// @param beg First element of the sub array
-/// @param end "One past the last" element of the sub array
-/// @param timeSleep pauses the thread for this many ms
-/// @return tuple, first is the pivot, second is the number of comparisons
-///
+/**
+ * @brief QuickSort Partition step. Iterators follow STL style for ranges.
+ * 
+ * @param parent  The parent array, needed for the swap utilities.
+ * @param beg First element of the sub array
+ * @param end "One past the last" element of the sub array
+ * @param timeSleep pauses the thread for this many ms
+ * @return tuple, first is the pivot, second is the number of comparisons
+ */
 static int quickSortHelper(std::vector<Sortable>& parent, SortableIterator beg, SortableIterator end, int timeSleep);
 static tuple<SortableIterator, int> quickSortPartition(std::vector<Sortable>& parent, SortableIterator beg, SortableIterator end, int timeSleep);
 
@@ -126,10 +132,22 @@ int algo::quickSort(std::vector<Sortable>& sortElements, int timeSleep) {
     return quickSortHelper(sortElements, sortElements.begin(), sortElements.end(), timeSleep);
 }
 
-///
-/// UTILITY FUNCTIONS
-///
+//
+// ────────────────────────────────────────────────────────── II ──────────
+//   :::::: U T I L I T I E S : :  :   :    :     :        :          :
+// ────────────────────────────────────────────────────────────────────
+//
 
+
+
+/**
+ * @brief algoUtils::swap - Utility function for swapping elements and changing the colors on swap.
+ * 
+ * @param sortElements The array where the elements being swapped are located
+ * @param timeSleep Time in milliseconds to wait between swaps
+ * @param el1 First element to be swapped
+ * @param el2 Second element to be swapped
+ */
 void algoUtils::swap(std::vector<Sortable>& sortElements, int timeSleep, Sortable& el1, Sortable& el2) {
 	el1.color = sf::Color::Red;
 	el2.color = sf::Color::Red;
