@@ -2,9 +2,7 @@
 compile() {
 	# Compile and clean
 	echo Compiling visualizer...
-
-	g++ *.cpp -o sorting-visualizer -lsfml-graphics -lsfml-window -lsfml-system
-	rm -rf *.o
+	make
 }
 
 main() {
@@ -15,10 +13,10 @@ main() {
 	echo ""
 	read -n 1 -p "Option: " option
 	echo ""
+	echo ""
 
 	if [ "$option" = "1" ]; then
 		compile
-		echo "Done! run ./sorting-visualizer to execute"
 		exit
 
 	elif [ "$option" = "2" ]; then
