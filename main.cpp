@@ -71,20 +71,6 @@ int main()
                     }
                     break;
 
-                // Dialog
-                case sf::Keyboard::F3:
-                    // Dialog is closed
-                    if(!isConfigToggled) {
-                        // Open dialog
-                        isConfigToggled = true;
-
-                    // Dialog is oppened
-                    } else {
-                        // Close dialog
-                        isConfigToggled = false;
-                    }
-                    break;
-
                 // Display help
                 case sf::Keyboard::H:
                     system(CLEAR);
