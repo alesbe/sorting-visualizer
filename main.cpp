@@ -1,11 +1,12 @@
-/*
-Sorting visualizer v1.0 (static version) - by alesbe
-Description: A program made with C++ and SFML to visualize sorting algorithms.
-
-License: MIT [alesbe 2022]
-
-github.com/alesbe/sorting-visualizer
-*/
+/**
+ * @name Sorting visualizer v1.0 (static version)
+ * @author alesbe - github.com/alesbe/
+ * @brief A lightweight sorting visualizer made with C++ and SFML.
+ * @version v1.1
+ * 
+ * @copyright License - MIT [alesbe 2022]
+ * 
+ */
 
 #ifdef _WIN32
 #define CLEAR "cls"
@@ -21,29 +22,30 @@ github.com/alesbe/sorting-visualizer
 
 int main()
 {
-    // Window
-    sf::RenderWindow window(sf::VideoMode(600, 400), "Sorting visualizer v1.0");
+    // Window settings
+    sf::RenderWindow window(sf::VideoMode(600, 400), "Sorting visualizer v1.1");
     window.setFramerateLimit(60);
 
-    // Configs (can be changed in runtime)q
-    bool isConfigToggled = false;
+    // Visualizer settings (can be changed on runtime through the key events)
     int numOfElements = 150;
     int timeSleep = 1;
     int sortType = 0;
 
-    // Initializations
+    // Initialize SortController
     SortController sortController(window.getSize(), timeSleep);
     sortController.populate(numOfElements);
 
+    // Declare thread used to sort the array in parallel with the sfml/draw thread
     std::thread sortingThread;
 
     // Main loop
     while (window.isOpen())
     {
+
+        // Events
         sf::Event event;
         while (window.pollEvent(event))
         {
-            // Key events
             if (event.type == sf::Event::KeyPressed) {
                 switch (event.key.code)
                 {
@@ -125,13 +127,15 @@ int main()
                 }
             }
 
+            // Close window
             if (event.type == sf::Event::Closed)
                 window.close();
         }
 
+        // Clear screen between each frame
         window.clear(sf::Color::Black);
 
-        // Draw elements
+        // Draw array elements
         int index = 0;
         for (auto sortable : sortController.sortElements) {
             sf::RectangleShape shape = sortable.shape();
@@ -140,25 +144,7 @@ int main()
             window.draw(shape);
         }
 
-        // Draw dialog
-        if(isConfigToggled) {
-            // Load font
-            sf::Font dialogFont;
-            if (!dialogFont.loadFromFile("font.ttf"))
-            {
-                std::cout << "Couldn't load font!";
-            }
-
-            // Draw text
-            sf::Text helpText;
-
-            helpText.setString("This is the config dialog");
-            helpText.setFont(dialogFont);
-            helpText.setCharacterSize(sortController.winWidth / 40);
-
-            window.draw(helpText);
-        }
-
+        // Display drawed content on screen
         window.display();
     }
 
