@@ -2,14 +2,17 @@
 
 A lightweight sorting visualizer made with C++ and [SFML](https://www.sfml-dev.org/index.php).
 
-![Quick sort gif](https://i.imgur.com/TsWwumg.gif) <br>
-*Quick sort* <br>
+| ![Quick sort gif](https://i.imgur.com/TsWwumg.gif) | 
+|:--:| 
+| *Quick sort* |
 
-![Bubble visualizer](https://i.imgur.com/086SZ51.png) <br>
-*Bubble sort* <br>
+| ![Bubble visualizer](https://i.imgur.com/086SZ51.png) | 
+|:--:| 
+| *Bubble sort* |
 
-![Bubble sort info](https://i.imgur.com/P5ypw86.png) <br>
-*Bubble sort info*
+| ![Bubble sort info](https://i.imgur.com/P5ypw86.png) | 
+|:--:| 
+| *Bubble sort info* |
 
 ## 📖 I want to contribute to the project!
 If you want to contibute go to the Wiki tab or press [here](https://github.com/alesbe/sorting-visualizer/wiki) to learn how!
