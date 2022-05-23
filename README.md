@@ -32,14 +32,12 @@ Awesome! [Here](https://github.com/alesbe/sorting-visualizer/wiki) you can find 
 - **Arrow Up / Arrow down**: Change sort type <br>
 
 ## 🖨️ Download
-*Note:* Right now the Makefile is not working! Use `install.sh` for Linux or compile the project yourself while we're fixing the [issue](https://github.com/alesbe/sorting-visualizer/issues/10)!
-
 ### 🐧 Linux
 - Clone the project: `git clone https://github.com/alesbe/sorting-visualizer && cd sorting-visualizer`
 - Run `./install.sh`
 
 ### 🪟🍎 Windows / MacOS
-Right now there isn't a pre-compiled executable, however, you can compile it following the [SFML guide](https://www.sfml-dev.org/tutorials/2.5/)!
+Use [CMake](https://cmake.org/runningcmake/) to build the project! `CMakeLists.txt` is already included.
 
 ## ⚠️ Reporting Bugs/Issues
 Please, follow [this](https://github.com/alesbe/sorting-visualizer/wiki/Submitting-an-Issue) template!
