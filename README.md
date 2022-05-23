@@ -15,7 +15,7 @@ A lightweight sorting visualizer made with C++ and [SFML](https://www.sfml-dev.o
 | *Bubble sort info* |
 
 ## 📖 I want to contribute to the project!
-If you want to contribute go to the Wiki tab or press [here](https://github.com/alesbe/sorting-visualizer/wiki) to learn how!
+Nice! [here](https://github.com/alesbe/sorting-visualizer/wiki) you can find some useful info about the visualizer, we accept first contributors too!
 
 ## 🗂️ Sort types
 - Bubble sort
