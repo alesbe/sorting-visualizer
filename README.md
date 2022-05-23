@@ -33,8 +33,7 @@ If you want to contibute go to the Wiki tab or press [here](https://github.com/a
 
 ## 🖨️ Download
 ### 🐧 Linux
-- Clone the project: `git clone https://github.com/alesbe/sorting-visualizer`
-- Install the [SFML library](https://www.sfml-dev.org/tutorials/2.5/start-linux.php) for you distribution
+- Clone the project: `git clone https://github.com/alesbe/sorting-visualizer && cd sorting-visualizer`
 - Run `./install.sh`
 
 ### 🪟🍎 Windows / MacOS
