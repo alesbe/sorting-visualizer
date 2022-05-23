@@ -32,6 +32,8 @@ If you want to contibute go to the Wiki tab or press [here](https://github.com/a
 - **Arrow Up / Arrow down**: Change sort type <br>
 
 ## 🖨️ Download
+*Note:* Right now the Makefile is not working! Use `install.sh` for Linux or compile the project yourself while we're fixing the [issue](https://github.com/alesbe/sorting-visualizer/issues/10)!
+
 ### 🐧 Linux
 - Clone the project: `git clone https://github.com/alesbe/sorting-visualizer && cd sorting-visualizer`
 - Run `./install.sh`
