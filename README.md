@@ -37,7 +37,7 @@ Awesome! [Here](https://github.com/alesbe/sorting-visualizer/wiki) you can find 
 - Run `./install.sh`
 
 ### 🪟🍎 Windows / MacOS
-Use [CMake](https://cmake.org/runningcmake/) to build the project! `CMakeLists.txt` is already included.
+- Use [CMake](https://cmake.org/runningcmake/) to build the project! `CMakeLists.txt` is already included.
 
 ## ⚠️ Reporting Bugs/Issues
 Please, follow [this](https://github.com/alesbe/sorting-visualizer/wiki/Submitting-an-Issue) template!
