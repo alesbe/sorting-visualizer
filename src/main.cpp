@@ -103,24 +103,28 @@ int main()
 
                 // Change number of elements
                 case sf::Keyboard::F1:
-                    system(CLEAR);
-                    std::cout << "Number of elements: ";
-                    std::cin >> numOfElements;
-                    std::cout << std::endl;
+                    if(!sortController.isSorting) {
+                        system(CLEAR);
+                        std::cout << "Number of elements: ";
+                        std::cin >> numOfElements;
+                        std::cout << std::endl;
 
-                    sortController.clear();
-                    sortController.populate(numOfElements);
-                    break;
+                        sortController.clear();
+                        sortController.populate(numOfElements);
+                        break;
+                    }
 
                 // Change time between comparisons
                 case sf::Keyboard::F2:
-                    system(CLEAR);
-                    std::cout << "Time between comparisons (milliseconds): ";
-                    std::cin >> timeSleep;
-                    std::cout << std::endl;
+                    if(!sortController.isSorting) {
+                        system(CLEAR);
+                        std::cout << "Time between comparisons (milliseconds): ";
+                        std::cin >> timeSleep;
+                        std::cout << std::endl;
 
-                    sortController.setTimeSleep(timeSleep);
-                    break;
+                        sortController.setTimeSleep(timeSleep);
+                        break;
+                    }
 
                 default:
                     break;
