@@ -10,7 +10,7 @@ compile() {
 	# Compile; Makefile is not used for now because
 	# it is not working as intended
 	echo Compiling visualizer...
-	g++ *.cpp -o sorting-visualizer -lsfml-graphics -lsfml-window -lsfml-system
+	g++ ./src/*.cpp -o sorting-visualizer -lsfml-graphics -lsfml-window -lsfml-system
 }
 
 install_sfml() {
