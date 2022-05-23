@@ -44,36 +44,38 @@ install_sfml() {
 
 main() {
 	# Select option
+	
 	echo "Where do you want to install the visualizer?"
-	echo "1.- Compile and leave the executable in this folder"
-	echo "2.- Compile and move the executable into /usr/bin"
+	echo "1.- Compile and leave the executable in this directory"
+	echo "2.- Compile and move the executable into /usr/bin (requires root)"
 	echo ""
 	read -n 1 -p "Option: " option
 	echo ""
 	echo ""
 
-	# Compile
+	# 1: Compile
 	if [ "$option" = "1" ]; then
 		compile
 
 		echo "Done!"
 		exit
 
-	# Compile and move binary to /usr/bin
+	# 2: Compile and move binary to /usr/bin
 	elif [ "$option" = "2" ]; then
-		# Check if has been runned as sudo
-		if [ "$EUID" -ne 0 ]
-			then echo "Please, run as root! (sudo ./install.sh)"
-			exit
-		fi
 
 		compile
 
 		# Move executable to /usr/bin
 		echo Moving executable into /usr/bin...
-		mv ./sorting-visualizer /usr/bin
+		sudo mv ./sorting-visualizer /usr/bin
 		echo Done!
 		exit
+
+	# -: Not a valid option
+	else
+		echo "Select a valid option!"
+		exit
+
 	fi
 }
 
