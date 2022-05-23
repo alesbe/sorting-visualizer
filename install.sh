@@ -52,6 +52,8 @@ main() {
 
 	if [ "$option" = "1" ]; then
 		compile
+
+		echo "Done!"
 		exit
 
 	elif [ "$option" = "2" ]; then
