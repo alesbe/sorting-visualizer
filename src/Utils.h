@@ -4,6 +4,6 @@
 namespace Utils
 {
 	std::string getSortType(int sortType);
-    bool hasNextSortType(int sortType);
+	bool hasNextSortType(int sortType);
 };
 

@@ -20,11 +20,11 @@ std::string Utils::getSortType(int sortType) {
 	case 2:
 		return "Insertion sort";
 
-    case 3:
-        return "Quick sort";
+	case 3:
+		return "Quick sort";
 
 	default:
-        return kNoSort;
+		return kNoSort;
 	}
 }
 
@@ -36,5 +36,5 @@ std::string Utils::getSortType(int sortType) {
  * @return false The sort algoritm does not exist
  */
 bool Utils::hasNextSortType(int sortType) {
-    return getSortType(sortType + 1) != kNoSort;
+	return getSortType(sortType + 1) != kNoSort;
 }

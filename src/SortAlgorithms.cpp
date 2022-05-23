@@ -102,34 +102,34 @@ static int quickSortHelper(std::vector<Sortable>& parent, SortableIterator beg, 
 static tuple<SortableIterator, int> quickSortPartition(std::vector<Sortable>& parent, SortableIterator beg, SortableIterator end, int timeSleep);
 
 static int quickSortHelper(std::vector<Sortable>& parent, SortableIterator beg, SortableIterator end, int timeSleep) {
-    // base case
-    if (end - beg < 2) return 0;
+	// base case
+	if (end - beg < 2) return 0;
 
-    auto [pivot, numOfComparisons] = quickSortPartition(parent, beg, end, timeSleep);
-    return numOfComparisons +
-        quickSortHelper(parent, beg, pivot, timeSleep) +
-        quickSortHelper(parent, pivot + 1, end, timeSleep);
+	auto [pivot, numOfComparisons] = quickSortPartition(parent, beg, end, timeSleep);
+	return numOfComparisons +
+		quickSortHelper(parent, beg, pivot, timeSleep) +
+		quickSortHelper(parent, pivot + 1, end, timeSleep);
 
 }
 
 static tuple<SortableIterator, int> quickSortPartition( std::vector<Sortable>& parent, SortableIterator beg, SortableIterator end, int timeSleep) {
-    auto pivot = end - 1;
-    int numOfComparisons = 0;
+	auto pivot = end - 1;
+	int numOfComparisons = 0;
 
-    auto lhs = beg;
-    for (auto rhs = lhs; rhs != pivot; ++rhs) {
-        ++numOfComparisons;
-        if (rhs->value <= pivot->value) {
-            algoUtils::swap(parent, timeSleep, *lhs, *rhs);
-            ++lhs;
-        }
-    }
-    algoUtils::swap(parent, timeSleep, *lhs, *pivot);
-    return tuple{lhs, numOfComparisons};
+	auto lhs = beg;
+	for (auto rhs = lhs; rhs != pivot; ++rhs) {
+		++numOfComparisons;
+		if (rhs->value <= pivot->value) {
+			algoUtils::swap(parent, timeSleep, *lhs, *rhs);
+			++lhs;
+		}
+	}
+	algoUtils::swap(parent, timeSleep, *lhs, *pivot);
+	return tuple{lhs, numOfComparisons};
 }
 
 int algo::quickSort(std::vector<Sortable>& sortElements, int timeSleep) {
-    return quickSortHelper(sortElements, sortElements.begin(), sortElements.end(), timeSleep);
+	return quickSortHelper(sortElements, sortElements.begin(), sortElements.end(), timeSleep);
 }
 
 //
