@@ -9,3 +9,4 @@ find_package(SFML COMPONENTS graphics window REQUIRED)
 add_executable(sorting-visualizer src/main.cpp src/Sortable.cpp src/SortAlgorithms.cpp src/SortController.cpp src/Utils.cpp)
 
 target_link_libraries(sorting-visualizer sfml-graphics sfml-window)
+
