@@ -25,15 +25,33 @@ install_sfml() {
 		exit
 	fi
 
+	# DETECT OS
+
+	# arch
 	if command -v pacman &>/dev/null; then
 		pacman -S sfml
+	
+	# debian
 	elif command -v apt-get &>/dev/null; then
 		apt-get install libsfml-dev
+
+	# fedora
 	elif command -v dnf &>/dev/null; then
 		dnf install SFML
+
+	# void linux (not tested)
+	elif command -v xbps &>/dev/null; then
+		# add multilib repo
+		xbps-install -Su void-repo-multilib
+
+		# install sfml
+		xbps-install -Su SFML-32bit
+
+	# packet manager not found
 	else
 		# package manager was not found
 		# maybe compile sfml ourselves?
+		# TODO: Implement issue #10 fix here
 		echo "Could not install SFML using the system package manager."
 		echo "Please install SFML yourself and run this script again."
 		exit
