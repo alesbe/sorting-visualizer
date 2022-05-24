@@ -147,13 +147,13 @@ bool SortController::isSorted() {
 };
 
 /**
- * @brief Do a checking animation from the start to the end of the array changing color to green to show that the algorithm finished. (Does not check the array, only do
- * the color animation)
+ * @brief Do a checking animation from the start to the end of the array changing color to green to show that the algorithm finished.
+ * (Does not check the array, only does the color animation)
  * 
  */
 void SortController::checkSortAnim() {
 	for (int n = 0; n < sortElements.size(); n++) {
 		sortElements[n].color = sf::Color::Green;
-		sf::sleep(sf::milliseconds(timeSleep));
+		sf::sleep(sf::milliseconds(1));
 	}
 };
