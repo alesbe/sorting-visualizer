@@ -1,6 +1,3 @@
 .vscode
 sorting-visualizer
-CMakeFiles
-cmake_install.cmake
-CMakeCache.txt
-Makefile
+build/

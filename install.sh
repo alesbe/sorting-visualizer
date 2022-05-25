@@ -2,12 +2,15 @@
 main() {
 	# Build Makefile
 	echo "Building Makefile..."
-	cmake CMakeLists.txt
+	mkdir -p build
+	pushd build
+	cmake ..
 	
 	# Compile using Makefile
 	echo ""
 	echo "Compiling project..."
-	make
+	popd
+	cmake --build build
 
 	# Select binary location
 	echo ""
@@ -18,12 +21,13 @@ main() {
 
 	# Option 1: Leave the binary in the same folder (project root)
 	if [ "$option" = "n" ]; then
+		mv build/sorting-visualizer .
 		echo "Done! Run ./sorting-visualizer"
 		exit
 	fi
 	
 	# Option 2: Move the binary to /usr/bin
-	sudo mv ./sorting-visualizer /usr/bin
+	sudo mv build/sorting-visualizer /usr/bin
 	echo "Done! Run sorting-visualizer"
 	
 	exit
