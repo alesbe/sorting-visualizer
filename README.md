@@ -37,7 +37,9 @@ Awesome! [Here](https://github.com/alesbe/sorting-visualizer/wiki) you can find 
 - Run `./install.sh`
 
 ### 🪟🍎 Windows / MacOS
-The libraries included with the project only work with g++ compiler, if you want to use it on Windows or macOS, you'll need to [download sfml yourself](https://www.sfml-dev.org/download/sfml/2.5.1/) and compile the source code located in `/src`.
+Right now the Windows and MacOS implementation is being disscused on [issue #12](https://github.com/alesbe/sorting-visualizer/issues/12)!
+
+The libraries included with the project only work with g++ compiler, for now, if you want to use it on Windows or macOS, you'll need to [download sfml yourself](https://www.sfml-dev.org/download/sfml/2.5.1/) and compile the source code located in `/src`.
 
 ## ⚠️ Reporting Bugs/Issues
 Please, follow [this](https://github.com/alesbe/sorting-visualizer/wiki/Submitting-an-Issue) template!
