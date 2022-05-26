@@ -125,7 +125,7 @@ static tuple<SortableIterator, int> quickSortPartition( std::vector<Sortable>& p
 		}
 	}
 	algoUtils::swap(parent, timeSleep, *lhs, *pivot);
-	return tuple{lhs, numOfComparisons};
+	return tuple<SortableIterator, int>{lhs, numOfComparisons};
 }
 
 int algo::quickSort(std::vector<Sortable>& sortElements, int timeSleep) {
@@ -137,8 +137,6 @@ int algo::quickSort(std::vector<Sortable>& sortElements, int timeSleep) {
 //   :::::: U T I L I T I E S : :  :   :    :     :        :          :
 // ────────────────────────────────────────────────────────────────────
 //
-
-
 
 /**
  * @brief algoUtils::swap - Utility function for swapping elements and changing the colors on swap.
