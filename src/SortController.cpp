@@ -45,9 +45,7 @@ void SortController::populate(int numOfElements) {
  * 
  */
 void SortController::randomize() {
-	auto rd = std::random_device{};
-	auto rng = std::default_random_engine{ rd() };
-	std::shuffle(std::begin(sortElements), std::end(sortElements), rng);
+	std::random_shuffle(std::begin(sortElements), std::end(sortElements));
 };
 
 /**
