@@ -105,7 +105,10 @@ static int quickSortHelper(std::vector<Sortable>& parent, SortableIterator beg, 
 	// base case
 	if (end - beg < 2) return 0;
 
-	auto [pivot, numOfComparisons] = quickSortPartition(parent, beg, end, timeSleep);
+	SortableIterator pivot;
+	int numOfComparisons;
+	std::tie(pivot, numOfComparisons) = quickSortPartition(parent, beg, end, timeSleep);
+	
 	return numOfComparisons +
 		quickSortHelper(parent, beg, pivot, timeSleep) +
 		quickSortHelper(parent, pivot + 1, end, timeSleep);
