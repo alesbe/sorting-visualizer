@@ -1,5 +1,5 @@
 /**
- * @name Sorting visualizer v1.0 (static version)
+ * @name Sorting visualizer
  * @author alesbe - github.com/alesbe/
  * @brief A lightweight sorting visualizer made with C++ and SFML.
  * @version v1.1
