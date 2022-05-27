@@ -8,10 +8,16 @@ assignees: ''
 ---
 
 ## Describe you problem / suggestion:
+<replace me>
 
 ## Steps to reproduce (optional):
+<replace me>
+
+## Additional info (optional):
+<replace me>
 
 ## Possible fix (optional):
+<replace me>
 
 ## OS
 - [ ] : Windows
