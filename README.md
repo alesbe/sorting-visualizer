@@ -38,6 +38,3 @@ Awesome! [Here](https://github.com/alesbe/sorting-visualizer/wiki) you can find 
 
 ### 🪟🍎 Windows / MacOS
 The libraries included with the project only work with gcc compiler, for now, if you want to use it on Windows or macOS, you'll need to [download sfml yourself](https://www.sfml-dev.org/download/sfml/2.5.1/) and compile the source code located in `/src` yourself.
-
-## ⚠️ Reporting Bugs/Issues
-Please, follow [this](https://github.com/alesbe/sorting-visualizer/wiki/Submitting-an-Issue) template!
