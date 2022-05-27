@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-## Describe you problem / suggestion:
+## Describe you problem:
 <replace me>
 
 ## Steps to reproduce (optional):
