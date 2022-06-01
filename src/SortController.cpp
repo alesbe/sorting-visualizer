@@ -117,6 +117,9 @@ void SortController::startSort(int sortType) {
 		case 3:
 			numOfComparisons += algo::quickSort(sortElements, timeSleep);
 			break;
+		case 4:
+			numOfComparisons += algo::cocktailSort(sortElements, timeSleep);
+			break;
 		default:
 			return;
 		}
