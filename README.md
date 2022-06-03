@@ -1,4 +1,7 @@
 # 📊 Sorting Visualizer
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 A lightweight sorting visualizer made with C++ and [SFML](https://www.sfml-dev.org/index.php).
 
@@ -42,3 +45,23 @@ Awesome! [Here](https://github.com/alesbe/sorting-visualizer/wiki) you can find 
 
 ### 🪟🍎 Windows / MacOS
 The libraries included with the project only work with gcc compiler, for now, if you want to use it on Windows or macOS, you'll need to [download sfml yourself](https://www.sfml-dev.org/download/sfml/2.5.1/) and compile the source code located in `/src` yourself.
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/BlueSkeleton"><img src="https://avatars.githubusercontent.com/u/56795657?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Tony</b></sub></a><br /><a href="https://github.com/alesbe/sorting-visualizer/commits?author=BlueSkeleton" title="Code">💻</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
