@@ -24,7 +24,8 @@ Awesome! [Here](https://github.com/alesbe/sorting-visualizer/wiki) you can find 
 - Selection sort - **[@alesbe](https://github.com/alesbe)**
 - Insertion sort - **[@alesbe](https://github.com/alesbe)**
 - Quick sort - **[@ariajanke](https://github.com/ariajanke)**
-- Cocktail shaker - **[@BlueSkeleton](https://github.com/BlueSkeleton)**
+- Cocktail shaker sort - **[@BlueSkeleton](https://github.com/BlueSkeleton)**
+- Bogo sort - **[@alesbe](https://github.com/alesbe)**
 
 ## 🕹️ Usage
 - **Space**: Start sort <br>
