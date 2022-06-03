@@ -18,7 +18,6 @@ A lightweight sorting visualizer made with C++ and [SFML](https://www.sfml-dev.o
 Awesome! [Here](https://github.com/alesbe/sorting-visualizer/wiki) you can find some useful info about the visualizer, we accept first contributors too!
 
 ## 🗂️ Sort types
-@alesbe
 - Bubble sort - **[@alesbe](https://github.com/alesbe)**
 - Selection sort - **[@alesbe](https://github.com/alesbe)**
 - Insertion sort - **[@alesbe](https://github.com/alesbe)**
