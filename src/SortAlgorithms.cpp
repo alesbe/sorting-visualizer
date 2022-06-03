@@ -176,6 +176,22 @@ int algo::cocktailSort(std::vector<Sortable>& sortElements, int timeSleep) {
 	return numOfComparisons;
 }
 
+/**
+ * @brief Bogo sort: Randomizes the array until is sorted
+ * 
+ * @param sortElements Main array containing the elements to be sorted
+ * @param timeSleep Time to wait between iterations in miliseconds
+ * @return Number of comparisons made
+ */
+int algo::bogoSort(std::vector<Sortable>& sortElements, int timeSleep) {
+	int numOfComparisons = 0;
+
+	std::random_shuffle(std::begin(sortElements), std::end(sortElements));
+	numOfComparisons++;
+
+	return numOfComparisons;
+}
+
 //
 // ────────────────────────────────────────────────────────── II ──────────
 //   :::::: U T I L I T I E S : :  :   :    :     :        :          :

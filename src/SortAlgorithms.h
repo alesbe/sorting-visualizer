@@ -8,6 +8,7 @@ namespace algo {
 	int insertionSort(std::vector<Sortable>& sortElements, int timeSleep);
 	int quickSort(std::vector<Sortable>& sortElements, int timeSleep);
 	int cocktailSort(std::vector<Sortable>& sortElements, int timeSleep);
+	int bogoSort(std::vector<Sortable>& sortElements, int timeSleep);
 }
 
 namespace algoUtils {
