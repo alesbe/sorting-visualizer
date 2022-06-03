@@ -13,6 +13,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "ariajanke",
+      "name": "Aria Janke",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5652149?v=4",
+      "profile": "https://github.com/ariajanke",
+      "contributions": [
+        "code",
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
