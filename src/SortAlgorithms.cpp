@@ -90,47 +90,6 @@ int algo::insertionSort(std::vector<Sortable>& sortElements, int timeSleep) {
 }
 
 /**
- * @brief Cocktail sort
- *
- * @param sortElements Main array containing the elements to be sorted
- * @param timeSleep Time to wait between iterations in miliseconds
- * @return Number of comparisons made
- */
-int algo::cocktailSort(std::vector<Sortable>& sortElements, int timeSleep) {
-	int numOfComparisons = 0;
-	bool Swapped = true;
-	int end = sortElements.size() - 1;
-	int start = 0;
-
-	while (Swapped == true) {
-
-		Swapped = false;
-
-		for (int n = 0 + start; n < end; n++) {
-			if (sortElements[n].value > sortElements[n + 1].value) {
-				algoUtils::swap(sortElements, timeSleep, sortElements[n], sortElements[n + 1]);
-				Swapped = true;
-			}
-			numOfComparisons++;
-
-			Swapped = false;
-			end = end - 1;
-
-		for (int n = 0 + end; n > start; n--) {
-			if (sortElements[n].value > sortElements[n + 1].value) {
-				algoUtils::swap(sortElements, timeSleep, sortElements[n], sortElements[n + 1]);
-				Swapped = true;
-			}
-			numOfComparisons++;
-
-			start = start + 1;
-			}
-		}
-	}
-	return numOfComparisons;
-}
-
-/**
  * @brief QuickSort Partition step. Iterators follow STL style for ranges.
  *
  * @param parent  The parent array, needed for the swap utilities.
@@ -174,6 +133,63 @@ static tuple<SortableIterator, int> quickSortPartition( std::vector<Sortable>& p
 
 int algo::quickSort(std::vector<Sortable>& sortElements, int timeSleep) {
 	return quickSortHelper(sortElements, sortElements.begin(), sortElements.end(), timeSleep);
+}
+
+/**
+ * @brief Cocktail sort
+ *
+ * @param sortElements Main array containing the elements to be sorted
+ * @param timeSleep Time to wait between iterations in miliseconds
+ * @return Number of comparisons made
+ */
+int algo::cocktailSort(std::vector<Sortable>& sortElements, int timeSleep) {
+	int numOfComparisons = 0;
+	bool Swapped = true;
+	int end = sortElements.size() - 1;
+	int start = 0;
+
+	while (Swapped == true) {
+
+		Swapped = false;
+
+		for (int n = 0 + start; n < end; n++) {
+			if (sortElements[n].value > sortElements[n + 1].value) {
+				algoUtils::swap(sortElements, timeSleep, sortElements[n], sortElements[n + 1]);
+				Swapped = true;
+			}
+			numOfComparisons++;
+
+			Swapped = false;
+			end = end - 1;
+
+		for (int n = 0 + end; n > start; n--) {
+			if (sortElements[n].value > sortElements[n + 1].value) {
+				algoUtils::swap(sortElements, timeSleep, sortElements[n], sortElements[n + 1]);
+				Swapped = true;
+			}
+			numOfComparisons++;
+
+			start = start + 1;
+			}
+		}
+	}
+	return numOfComparisons;
+}
+
+/**
+ * @brief Bogo sort: Randomizes the array until is sorted
+ * 
+ * @param sortElements Main array containing the elements to be sorted
+ * @param timeSleep Time to wait between iterations in miliseconds
+ * @return Number of comparisons made
+ */
+int algo::bogoSort(std::vector<Sortable>& sortElements, int timeSleep) {
+	int numOfComparisons = 0;
+
+	std::random_shuffle(std::begin(sortElements), std::end(sortElements));
+	numOfComparisons++;
+
+	return numOfComparisons;
 }
 
 //
