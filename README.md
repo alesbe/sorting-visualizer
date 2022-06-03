@@ -22,6 +22,7 @@ Awesome! [Here](https://github.com/alesbe/sorting-visualizer/wiki) you can find 
 - Selection sort
 - Insertion sort
 - Quick sort
+- Cocktail shaker sort
 
 ## 🕹️ Usage
 - **Space**: Start sort <br>
