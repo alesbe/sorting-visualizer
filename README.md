@@ -1,7 +1,4 @@
 # 📊 Sorting Visualizer
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 A lightweight sorting visualizer made with C++ and [SFML](https://www.sfml-dev.org/index.php).
 
