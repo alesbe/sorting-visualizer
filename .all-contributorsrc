@@ -23,6 +23,19 @@
         "code",
         "bug"
       ]
+    },
+    {
+      "login": "bazuin-32",
+      "name": "bazuin-32",
+      "avatar_url": "https://avatars.githubusercontent.com/u/86376856?v=4",
+      "profile": "https://github.com/bazuin-32",
+      "contributions": [
+        "bug",
+        "code",
+        "ideas",
+        "infra",
+        "platform"
+      ]
     }
   ],
   "contributorsPerLine": 7,
