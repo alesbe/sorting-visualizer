@@ -13,7 +13,7 @@ using std::tuple;
 
 /**
  * @brief Bubble sort
- * 
+ *
  * @param sortElements Main array containing the elements to be sorted
  * @param timeSleep Time to wait between iterations in miliseconds
  * @return Number of comparisons made
@@ -33,7 +33,7 @@ int algo::bubbleSort(std::vector<Sortable>& sortElements, int timeSleep) {
 
 /**
  * @brief Selection sort
- * 
+ *
  * @param sortElements Main array containing the elements to be sorted
  * @param timeSleep Time to wait between iterations in miliseconds
  * @return Number of comparisons made
@@ -56,7 +56,7 @@ int algo::selectionSort(std::vector<Sortable>& sortElements, int timeSleep) {
 
 /**
  * @brief Insertion sort
- * 
+ *
  * @param sortElements Main array containing the elements to be sorted
  * @param timeSleep Time to wait between iterations in miliseconds
  * @return Number of comparisons made
@@ -76,7 +76,7 @@ int algo::insertionSort(std::vector<Sortable>& sortElements, int timeSleep) {
 
 			sf::sleep(sf::milliseconds(timeSleep));
 			sortElements[j+1].color = sf::Color::White;
-			
+
 			j = j - 1;
 
 			numOfComparisons++;
@@ -90,8 +90,49 @@ int algo::insertionSort(std::vector<Sortable>& sortElements, int timeSleep) {
 }
 
 /**
+ * @brief Cocktail sort
+ *
+ * @param sortElements Main array containing the elements to be sorted
+ * @param timeSleep Time to wait between iterations in miliseconds
+ * @return Number of comparisons made
+ */
+int algo::cocktailSort(std::vector<Sortable>& sortElements, int timeSleep) {
+	int numOfComparisons = 0;
+	bool Swapped = true;
+	int end = sortElements.size() - 1;
+	int start = 0;
+
+	while (Swapped == true) {
+
+		Swapped = false;
+
+		for (int n = 0 + start; n < end; n++) {
+			if (sortElements[n].value > sortElements[n + 1].value) {
+				algoUtils::swap(sortElements, timeSleep, sortElements[n], sortElements[n + 1]);
+				Swapped = true;
+			}
+			numOfComparisons++;
+
+			Swapped = false;
+			end = end - 1;
+
+		for (int n = 0 + end; n > start; n--) {
+			if (sortElements[n].value > sortElements[n + 1].value) {
+				algoUtils::swap(sortElements, timeSleep, sortElements[n], sortElements[n + 1]);
+				Swapped = true;
+			}
+			numOfComparisons++;
+
+			start = start + 1;
+			}
+		}
+	}
+	return numOfComparisons;
+}
+
+/**
  * @brief QuickSort Partition step. Iterators follow STL style for ranges.
- * 
+ *
  * @param parent  The parent array, needed for the swap utilities.
  * @param beg First element of the sub array
  * @param end "One past the last" element of the sub array
@@ -108,7 +149,7 @@ static int quickSortHelper(std::vector<Sortable>& parent, SortableIterator beg, 
 	SortableIterator pivot;
 	int numOfComparisons;
 	std::tie(pivot, numOfComparisons) = quickSortPartition(parent, beg, end, timeSleep);
-	
+
 	return numOfComparisons +
 		quickSortHelper(parent, beg, pivot, timeSleep) +
 		quickSortHelper(parent, pivot + 1, end, timeSleep);
@@ -143,7 +184,7 @@ int algo::quickSort(std::vector<Sortable>& sortElements, int timeSleep) {
 
 /**
  * @brief algoUtils::swap - Utility function for swapping elements and changing the colors on swap.
- * 
+ *
  * @param sortElements The array where the elements being swapped are located
  * @param timeSleep Time in milliseconds to wait between swaps
  * @param el1 First element to be swapped
