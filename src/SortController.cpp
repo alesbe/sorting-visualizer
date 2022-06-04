@@ -113,7 +113,7 @@ void SortController::_startSort(int sortType) {
 			numOfComparisons += algo::cocktailSort(_sortElements, _timeSleep, _interrupt);
 			break;
 		case 5:
-			numOfComparisons += algo::bogoSort(_sortElements, _timeSleep, _interrupt);
+			numOfComparisons += algo::bogoSort(_sortElements, _timeSleep);
 			break;
 		default:
 			return;

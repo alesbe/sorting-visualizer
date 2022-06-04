@@ -23,6 +23,10 @@ int algo::bubbleSort(std::vector<Sortable>& sortElements, int timeSleep, const s
 	int numOfComparisons = 0;
 
 	for (int n = 0; n < sortElements.size() - 1; n++) {
+		if (interrupt) {
+			return numOfComparisons;
+		}
+
 		if (sortElements[n].value > sortElements[n + 1].value) {
 			algoUtils::swap(sortElements, timeSleep, sortElements[n], sortElements[n+1]);
 		}
@@ -44,6 +48,10 @@ int algo::selectionSort(std::vector<Sortable>& sortElements, int timeSleep, cons
 
 	for (int n = 0; n <= sortElements.size() - 1; n++) {
 		for (int j = n; j <= sortElements.size() - 1; j++) {
+			if (interrupt) {
+				return numOfComparisons;
+			}
+
 			if (sortElements[n].value > sortElements[j].value) {
 				algoUtils::swap(sortElements, timeSleep, sortElements[n], sortElements[j]);
 
@@ -71,6 +79,10 @@ int algo::insertionSort(std::vector<Sortable>& sortElements, int timeSleep, cons
 		int j = n - 1;
 		while (j >= 0 && temp.value <= sortElements[j].value)
 		{
+			if (interrupt) {
+				return numOfComparisons;
+			}
+
 			sortElements[j].color = sf::Color::Red;
 
 			sortElements[j + 1] = sortElements[j];
@@ -127,7 +139,7 @@ static tuple<SortableIterator, int> quickSortPartition( std::vector<Sortable>& p
 	auto lhs = beg;
 	for (auto rhs = lhs; rhs != pivot; ++rhs) {
 		if (interrupt) {
-			return std::make_tuple(pivot, numOfComparisons);
+			return std::make_tuple(lhs, numOfComparisons);
 		}
 
 		++numOfComparisons;
@@ -172,6 +184,10 @@ int algo::cocktailSort(std::vector<Sortable>& sortElements, int timeSleep, const
 			end = end - 1;
 
 		for (int n = 0 + end; n > start; n--) {
+			if (interrupt) {
+				return numOfComparisons;
+			}
+
 			if (sortElements[n].value > sortElements[n + 1].value) {
 				algoUtils::swap(sortElements, timeSleep, sortElements[n], sortElements[n + 1]);
 				Swapped = true;
@@ -192,7 +208,7 @@ int algo::cocktailSort(std::vector<Sortable>& sortElements, int timeSleep, const
  * @param timeSleep Time to wait between iterations in miliseconds
  * @return Number of comparisons made
  */
-int algo::bogoSort(std::vector<Sortable>& sortElements, int timeSleep, const std::atomic<bool>& interrupt) {
+int algo::bogoSort(std::vector<Sortable>& sortElements, int timeSleep) {
 	int numOfComparisons = 0;
 
 	std::random_shuffle(std::begin(sortElements), std::end(sortElements));
