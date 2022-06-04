@@ -93,7 +93,7 @@ void SortController::_startSort(int sortType) {
 
 	displaySortInfo(sortType, _isSorting, numOfComparisons, sortTime.getElapsedTime().asMilliseconds());
 
-	while (!isSorted())
+	while (!isSorted() && !_interrupt)
 	{
 		switch (sortType)
 		{
@@ -121,6 +121,16 @@ void SortController::_startSort(int sortType) {
 	}
 
 	_isSorting = false;
+
+	// if the sorting was interrupted, the array is not sorted
+	// so we replace it with a sorted array so the animation
+	// looks correct
+	if (_interrupt) {
+		int n = _sortElements.size();
+		_sortElements.clear();
+		populate(n);
+	}
+
 	displaySortInfo(sortType, _isSorting, numOfComparisons, sortTime.getElapsedTime().asMilliseconds());
 	checkSortAnim();
 }
@@ -131,8 +141,9 @@ void SortController::_startSort(int sortType) {
  * @param sortType Number associated to the algorithm
  */
 void SortController::startSort(int sortType) {
+	// if the last sort completed on its own, the thread has not
+	// been joined yet, so we need to join it
 	if (_sortingThread.joinable()) {
-		_interrupt = true;
 		_sortingThread.join();
 	}
 
