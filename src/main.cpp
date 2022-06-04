@@ -52,7 +52,7 @@ int main()
 
 				// Start sort
 				case sf::Keyboard::Space:
-					if (!sortController.isSorting) {
+					if (!sortController.isSorting()) {
 						sortController.clear();
 						sortController.populate(numOfElements);
 						sortController.randomize();
@@ -65,7 +65,7 @@ int main()
 
 				// Stop sort
 				case sf::Keyboard::Backspace:
-					if (sortController.isSorting) {
+					if (sortController.isSorting()) {
 						system(CLEAR);
 						std::cout << "Sort stopped!" << std::endl;
 						sortController.clear();
@@ -103,7 +103,7 @@ int main()
 
 				// Change number of elements
 				case sf::Keyboard::F1:
-					if(!sortController.isSorting) {
+					if(!sortController.isSorting()) {
 						system(CLEAR);
 						std::cout << "Number of elements: ";
 						std::cin >> numOfElements;
@@ -116,7 +116,7 @@ int main()
 
 				// Change time between comparisons
 				case sf::Keyboard::F2:
-					if(!sortController.isSorting) {
+					if(!sortController.isSorting()) {
 						system(CLEAR);
 						std::cout << "Time between comparisons (milliseconds): ";
 						std::cin >> timeSleep;
@@ -141,10 +141,10 @@ int main()
 
 		// Draw array elements
 		int index = 0;
-		for (auto sortable : sortController.sortElements) {
+		for (auto sortable : sortController.sortElements()) {
 			sf::RectangleShape shape = sortable.shape();
 			shape.setFillColor(sortable.color);
-			shape.setPosition(sf::Vector2f(sortable.width * index++, sortController.winHeight - sortable.height));
+			shape.setPosition(sf::Vector2f(sortable.width * index++, sortController.winHeight() - sortable.height));
 			window.draw(shape);
 		}
 
