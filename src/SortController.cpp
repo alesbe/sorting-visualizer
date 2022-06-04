@@ -98,22 +98,22 @@ void SortController::_startSort(int sortType) {
 		switch (sortType)
 		{
 		case 0:
-			numOfComparisons += algo::bubbleSort(_sortElements, _timeSleep);
+			numOfComparisons += algo::bubbleSort(_sortElements, _timeSleep, _interrupt);
 			break;
 		case 1:
-			numOfComparisons += algo::selectionSort(_sortElements, _timeSleep);
+			numOfComparisons += algo::selectionSort(_sortElements, _timeSleep, _interrupt);
 			break;
 		case 2:
-			numOfComparisons += algo::insertionSort(_sortElements, _timeSleep);
+			numOfComparisons += algo::insertionSort(_sortElements, _timeSleep, _interrupt);
 			break;
 		case 3:
-			numOfComparisons += algo::quickSort(_sortElements, _timeSleep);
+			numOfComparisons += algo::quickSort(_sortElements, _timeSleep, _interrupt);
 			break;
 		case 4:
-			numOfComparisons += algo::cocktailSort(_sortElements, _timeSleep);
+			numOfComparisons += algo::cocktailSort(_sortElements, _timeSleep, _interrupt);
 			break;
 		case 5:
-			numOfComparisons += algo::bogoSort(_sortElements, _timeSleep);
+			numOfComparisons += algo::bogoSort(_sortElements, _timeSleep, _interrupt);
 			break;
 		default:
 			return;
@@ -127,7 +127,7 @@ void SortController::_startSort(int sortType) {
 	// looks correct
 	if (_interrupt) {
 		int n = _sortElements.size();
-		_sortElements.clear();
+		clear();
 		populate(n);
 	}
 

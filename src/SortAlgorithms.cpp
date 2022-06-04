@@ -1,5 +1,6 @@
 #include "SortAlgorithms.h"
 
+#include <atomic>
 #include <tuple>
 
 using SortableIterator = std::vector<Sortable>::iterator;
@@ -18,7 +19,7 @@ using std::tuple;
  * @param timeSleep Time to wait between iterations in miliseconds
  * @return Number of comparisons made
  */
-int algo::bubbleSort(std::vector<Sortable>& sortElements, int timeSleep) {
+int algo::bubbleSort(std::vector<Sortable>& sortElements, int timeSleep, const std::atomic<bool>& interrupt) {
 	int numOfComparisons = 0;
 
 	for (int n = 0; n < sortElements.size() - 1; n++) {
@@ -38,7 +39,7 @@ int algo::bubbleSort(std::vector<Sortable>& sortElements, int timeSleep) {
  * @param timeSleep Time to wait between iterations in miliseconds
  * @return Number of comparisons made
  */
-int algo::selectionSort(std::vector<Sortable>& sortElements, int timeSleep) {
+int algo::selectionSort(std::vector<Sortable>& sortElements, int timeSleep, const std::atomic<bool>& interrupt) {
 	int numOfComparisons = 0;
 
 	for (int n = 0; n <= sortElements.size() - 1; n++) {
@@ -61,7 +62,7 @@ int algo::selectionSort(std::vector<Sortable>& sortElements, int timeSleep) {
  * @param timeSleep Time to wait between iterations in miliseconds
  * @return Number of comparisons made
  */
-int algo::insertionSort(std::vector<Sortable>& sortElements, int timeSleep) {
+int algo::insertionSort(std::vector<Sortable>& sortElements, int timeSleep, const std::atomic<bool>& interrupt) {
 	int numOfComparisons = 0;
 
 	for (int n = 1; n < sortElements.size(); n++)
@@ -98,29 +99,37 @@ int algo::insertionSort(std::vector<Sortable>& sortElements, int timeSleep) {
  * @param timeSleep pauses the thread for this many ms
  * @return tuple, first is the pivot, second is the number of comparisons
  */
-static int quickSortHelper(std::vector<Sortable>& parent, SortableIterator beg, SortableIterator end, int timeSleep);
-static tuple<SortableIterator, int> quickSortPartition(std::vector<Sortable>& parent, SortableIterator beg, SortableIterator end, int timeSleep);
+static int quickSortHelper(std::vector<Sortable>& parent, SortableIterator beg, SortableIterator end, int timeSleep, const std::atomic<bool>& interrupt);
+static tuple<SortableIterator, int> quickSortPartition(std::vector<Sortable>& parent, SortableIterator beg, SortableIterator end, int timeSleep, const std::atomic<bool>& interrupt);
 
-static int quickSortHelper(std::vector<Sortable>& parent, SortableIterator beg, SortableIterator end, int timeSleep) {
+static int quickSortHelper(std::vector<Sortable>& parent, SortableIterator beg, SortableIterator end, int timeSleep, const std::atomic<bool>& interrupt) {
+	if (interrupt) {
+		return 0;
+	}
+
 	// base case
 	if (end - beg < 2) return 0;
 
 	SortableIterator pivot;
 	int numOfComparisons;
-	std::tie(pivot, numOfComparisons) = quickSortPartition(parent, beg, end, timeSleep);
+	std::tie(pivot, numOfComparisons) = quickSortPartition(parent, beg, end, timeSleep, interrupt);
 
 	return numOfComparisons +
-		quickSortHelper(parent, beg, pivot, timeSleep) +
-		quickSortHelper(parent, pivot + 1, end, timeSleep);
+		quickSortHelper(parent, beg, pivot, timeSleep, interrupt) +
+		quickSortHelper(parent, pivot + 1, end, timeSleep, interrupt);
 
 }
 
-static tuple<SortableIterator, int> quickSortPartition( std::vector<Sortable>& parent, SortableIterator beg, SortableIterator end, int timeSleep) {
+static tuple<SortableIterator, int> quickSortPartition( std::vector<Sortable>& parent, SortableIterator beg, SortableIterator end, int timeSleep, const std::atomic<bool>& interrupt) {
 	auto pivot = end - 1;
 	int numOfComparisons = 0;
 
 	auto lhs = beg;
 	for (auto rhs = lhs; rhs != pivot; ++rhs) {
+		if (interrupt) {
+			return std::make_tuple(pivot, numOfComparisons);
+		}
+
 		++numOfComparisons;
 		if (rhs->value <= pivot->value) {
 			algoUtils::swap(parent, timeSleep, *lhs, *rhs);
@@ -131,8 +140,8 @@ static tuple<SortableIterator, int> quickSortPartition( std::vector<Sortable>& p
 	return tuple<SortableIterator, int>{lhs, numOfComparisons};
 }
 
-int algo::quickSort(std::vector<Sortable>& sortElements, int timeSleep) {
-	return quickSortHelper(sortElements, sortElements.begin(), sortElements.end(), timeSleep);
+int algo::quickSort(std::vector<Sortable>& sortElements, int timeSleep, const std::atomic<bool>& interrupt) {
+	return quickSortHelper(sortElements, sortElements.begin(), sortElements.end(), timeSleep, interrupt);
 }
 
 /**
@@ -142,7 +151,7 @@ int algo::quickSort(std::vector<Sortable>& sortElements, int timeSleep) {
  * @param timeSleep Time to wait between iterations in miliseconds
  * @return Number of comparisons made
  */
-int algo::cocktailSort(std::vector<Sortable>& sortElements, int timeSleep) {
+int algo::cocktailSort(std::vector<Sortable>& sortElements, int timeSleep, const std::atomic<bool>& interrupt) {
 	int numOfComparisons = 0;
 	bool Swapped = true;
 	int end = sortElements.size() - 1;
@@ -183,7 +192,7 @@ int algo::cocktailSort(std::vector<Sortable>& sortElements, int timeSleep) {
  * @param timeSleep Time to wait between iterations in miliseconds
  * @return Number of comparisons made
  */
-int algo::bogoSort(std::vector<Sortable>& sortElements, int timeSleep) {
+int algo::bogoSort(std::vector<Sortable>& sortElements, int timeSleep, const std::atomic<bool>& interrupt) {
 	int numOfComparisons = 0;
 
 	std::random_shuffle(std::begin(sortElements), std::end(sortElements));
