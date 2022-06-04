@@ -87,13 +87,7 @@ void SortController::displaySortInfo(int sortType, bool isSorting, int numOfComp
 // ────────────────────────────────────────────────────────────────────────────────
 //
 
-/**
- * @brief Start sort timer, run the algorithm and increment the number of comparisons while the array isn't sorted, and display sort info at the end.
- * 
- * @param sortType Number associated to the algorithm
- */
-void SortController::startSort(int sortType) {
-	_isSorting = true;
+void SortController::_startSort(int sortType) {
 	int numOfComparisons = 0;
 	sf::Clock sortTime;
 
@@ -129,6 +123,29 @@ void SortController::startSort(int sortType) {
 	_isSorting = false;
 	displaySortInfo(sortType, _isSorting, numOfComparisons, sortTime.getElapsedTime().asMilliseconds());
 	checkSortAnim();
+}
+
+/**
+ * @brief Start sort timer, run the algorithm and increment the number of comparisons while the array isn't sorted, and display sort info at the end.
+ * 
+ * @param sortType Number associated to the algorithm
+ */
+void SortController::startSort(int sortType) {
+	if (_sortingThread.joinable()) {
+		_interrupt = true;
+		_sortingThread.join();
+	}
+
+	_interrupt = false;
+	_isSorting = true;
+
+	_sortingThread = std::thread(&SortController::_startSort, this, sortType);
+}
+
+void SortController::stopSort() {
+	_interrupt = true;
+	_sortingThread.join();
+	_isSorting = false;
 }
 
 /**

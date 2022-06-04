@@ -35,9 +35,6 @@ int main()
 	SortController sortController(window.getSize(), timeSleep);
 	sortController.populate(numOfElements);
 
-	// Declare thread used to sort the array in parallel with the sfml/draw thread
-	std::thread sortingThread;
-
 	// Main loop
 	while (window.isOpen())
 	{
@@ -57,9 +54,7 @@ int main()
 						sortController.populate(numOfElements);
 						sortController.randomize();
 
-						// Move sorting to a different thread (main thread will be drawing and can't be blocked)
-						sortingThread = std::thread(&SortController::startSort, &sortController, sortType);
-						sortingThread.detach();
+	 					sortController.startSort(sortType);
 					}
 					break;
 
@@ -68,8 +63,7 @@ int main()
 					if (sortController.isSorting()) {
 						system(CLEAR);
 						std::cout << "Sort stopped!" << std::endl;
-						sortController.clear();
-						sortController.populate(numOfElements);
+						sortController.stopSort();
 					}
 					break;
 

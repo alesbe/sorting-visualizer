@@ -27,6 +27,10 @@ private:
 
 	std::thread _sortingThread;
 
+	// this does the actual sorting loop, while `startSort`
+	// (with no underscore) just starts this function in its own thread
+	void _startSort(int sortType);
+
 public:
 	SortController(sf::Vector2u windowSize, int timeSleep);
 
