@@ -126,8 +126,10 @@ int main()
 			}
 
 			// Close window
-			if (event.type == sf::Event::Closed)
+			if (event.type == sf::Event::Closed) {
+				sortController.stopSort();
 				window.close();
+			}
 		}
 
 		// Clear screen between each frame
