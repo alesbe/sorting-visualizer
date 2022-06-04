@@ -154,6 +154,12 @@ void SortController::startSort(int sortType) {
 }
 
 void SortController::stopSort() {
+	// this only happens if `stopSort` was already called,
+	// so the thread is already joined
+	if (!_sortingThread.joinable()) {
+		return;
+	}
+
 	_interrupt = true;
 	_sortingThread.join();
 	_isSorting = false;
