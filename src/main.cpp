@@ -35,9 +35,6 @@ int main()
 	SortController sortController(window.getSize(), timeSleep);
 	sortController.populate(numOfElements);
 
-	// Declare thread used to sort the array in parallel with the sfml/draw thread
-	std::thread sortingThread;
-
 	// Main loop
 	while (window.isOpen())
 	{
@@ -52,24 +49,21 @@ int main()
 
 				// Start sort
 				case sf::Keyboard::Space:
-					if (!sortController.isSorting) {
+					if (!sortController.isSorting()) {
 						sortController.clear();
 						sortController.populate(numOfElements);
 						sortController.randomize();
 
-						// Move sorting to a different thread (main thread will be drawing and can't be blocked)
-						sortingThread = std::thread(&SortController::startSort, &sortController, sortType);
-						sortingThread.detach();
+	 					sortController.startSort(sortType);
 					}
 					break;
 
 				// Stop sort
 				case sf::Keyboard::Backspace:
-					if (sortController.isSorting) {
+					if (sortController.isSorting()) {
 						system(CLEAR);
 						std::cout << "Sort stopped!" << std::endl;
-						sortController.clear();
-						sortController.populate(numOfElements);
+						sortController.stopSort();
 					}
 					break;
 
@@ -103,7 +97,7 @@ int main()
 
 				// Change number of elements
 				case sf::Keyboard::F1:
-					if(!sortController.isSorting) {
+					if(!sortController.isSorting()) {
 						system(CLEAR);
 						std::cout << "Number of elements: ";
 						std::cin >> numOfElements;
@@ -116,7 +110,7 @@ int main()
 
 				// Change time between comparisons
 				case sf::Keyboard::F2:
-					if(!sortController.isSorting) {
+					if(!sortController.isSorting()) {
 						system(CLEAR);
 						std::cout << "Time between comparisons (milliseconds): ";
 						std::cin >> timeSleep;
@@ -132,8 +126,10 @@ int main()
 			}
 
 			// Close window
-			if (event.type == sf::Event::Closed)
+			if (event.type == sf::Event::Closed) {
+				sortController.stopSort();
 				window.close();
+			}
 		}
 
 		// Clear screen between each frame
@@ -141,10 +137,10 @@ int main()
 
 		// Draw array elements
 		int index = 0;
-		for (auto sortable : sortController.sortElements) {
+		for (auto sortable : sortController.sortElements()) {
 			sf::RectangleShape shape = sortable.shape();
 			shape.setFillColor(sortable.color);
-			shape.setPosition(sf::Vector2f(sortable.width * index++, sortController.winHeight - sortable.height));
+			shape.setPosition(sf::Vector2f(sortable.width * index++, sortController.winHeight() - sortable.height));
 			window.draw(shape);
 		}
 

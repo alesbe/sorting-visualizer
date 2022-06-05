@@ -7,11 +7,9 @@
  * @param windowSize Window size vector (x, y)
  * @param timeSleep Time to wait between iterations while sorting in miliseconds
  */
-SortController::SortController(sf::Vector2u windowSize, int timeSleep) {
-	this->winWidth = windowSize.x;
-	this->winHeight = windowSize.y;
-
-	this->timeSleep = timeSleep;
+SortController::SortController(sf::Vector2u windowSize, int timeSleep)
+:	_winWidth(windowSize.x), _winHeight(windowSize.y), _timeSleep(timeSleep) {
+	//
 }
 
 //
@@ -25,7 +23,7 @@ SortController::SortController(sf::Vector2u windowSize, int timeSleep) {
  * 
  */
 void SortController::clear() {
-	sortElements.clear();
+	_sortElements.clear();
 }
 
 /**
@@ -35,8 +33,8 @@ void SortController::clear() {
  */
 void SortController::populate(int numOfElements) {
 	for (int n = 0; n < numOfElements; n++) {
-		Sortable sortable(((float)winWidth / numOfElements), ((float)winHeight / numOfElements) * (n+1), n); // Width defined for max space in window, height defined by element value
-		sortElements.push_back(sortable);
+		Sortable sortable(((float)_winWidth / numOfElements), ((float)_winHeight / numOfElements) * (n+1), n); // Width defined for max space in window, height defined by element value
+		_sortElements.push_back(sortable);
 	}
 }
 
@@ -45,7 +43,7 @@ void SortController::populate(int numOfElements) {
  * 
  */
 void SortController::randomize() {
-	std::random_shuffle(std::begin(sortElements), std::end(sortElements));
+	std::random_shuffle(std::begin(_sortElements), std::end(_sortElements));
 };
 
 /**
@@ -54,7 +52,7 @@ void SortController::randomize() {
  * @param t Time to wait between iterations while sorting in miliseconds
  */
 void SortController::setTimeSleep(int t) {
-	timeSleep = t;
+	_timeSleep = t;
 }
 
 /**
@@ -67,7 +65,7 @@ void SortController::setTimeSleep(int t) {
  * 
  * 
  */
-void SortController::displaySortInfo(int sortType, bool isSorting, int numOfComparisons, int sortTime) {
+void SortController::displaySortInfo(int sortType, bool isSorting, int numOfComparisons, int sortTime) const {
 	system(CLEAR);
 	
 	std::cout << "Sort type: " << Utils::getSortType(sortType) << std::endl << std::endl;
@@ -77,8 +75,8 @@ void SortController::displaySortInfo(int sortType, bool isSorting, int numOfComp
 	}
 	else {
 		std::cout << "Sort time: " << sortTime << "ms || " << (double)sortTime/1000 << "s" << std::endl;
-		std::cout << "Number of elements: " << sortElements.size() << std::endl;
-		std::cout << "Time between comparisons: " << timeSleep << "ms" << std::endl;
+		std::cout << "Number of elements: " << _sortElements.size() << std::endl;
+		std::cout << "Time between comparisons: " << _timeSleep << "ms" << std::endl;
 		std::cout << "Number of comparisons: " << numOfComparisons << std::endl;
 	}
 }
@@ -89,48 +87,83 @@ void SortController::displaySortInfo(int sortType, bool isSorting, int numOfComp
 // ────────────────────────────────────────────────────────────────────────────────
 //
 
-/**
- * @brief Start sort timer, run the algorithm and increment the number of comparisons while the array isn't sorted, and display sort info at the end.
- * 
- * @param sortType Number associated to the algorithm
- */
-void SortController::startSort(int sortType) {
-	isSorting = true;
+void SortController::_startSort(int sortType) {
 	int numOfComparisons = 0;
 	sf::Clock sortTime;
 
-	displaySortInfo(sortType, isSorting, numOfComparisons, sortTime.getElapsedTime().asMilliseconds());
+	displaySortInfo(sortType, _isSorting, numOfComparisons, sortTime.getElapsedTime().asMilliseconds());
 
-	while (!isSorted())
+	while (!isSorted() && !_interrupt)
 	{
 		switch (sortType)
 		{
 		case 0:
-			numOfComparisons += algo::bubbleSort(sortElements, timeSleep);
+			numOfComparisons += algo::bubbleSort(_sortElements, _timeSleep, _interrupt);
 			break;
 		case 1:
-			numOfComparisons += algo::selectionSort(sortElements, timeSleep);
+			numOfComparisons += algo::selectionSort(_sortElements, _timeSleep, _interrupt);
 			break;
 		case 2:
-			numOfComparisons += algo::insertionSort(sortElements, timeSleep);
+			numOfComparisons += algo::insertionSort(_sortElements, _timeSleep, _interrupt);
 			break;
 		case 3:
-			numOfComparisons += algo::quickSort(sortElements, timeSleep);
+			numOfComparisons += algo::quickSort(_sortElements, _timeSleep, _interrupt);
 			break;
 		case 4:
-			numOfComparisons += algo::cocktailSort(sortElements, timeSleep);
+			numOfComparisons += algo::cocktailSort(_sortElements, _timeSleep, _interrupt);
 			break;
 		case 5:
-			numOfComparisons += algo::bogoSort(sortElements, timeSleep);
+			numOfComparisons += algo::bogoSort(_sortElements, _timeSleep);
 			break;
 		default:
 			return;
 		}
 	}
 
-	isSorting = false;
-	displaySortInfo(sortType, isSorting, numOfComparisons, sortTime.getElapsedTime().asMilliseconds());
-	checkSortAnim();
+	_isSorting = false;
+
+	// if the sorting was interrupted, the array is not sorted
+	// so we replace it with a sorted array so the animation
+	// looks correct
+	if (_interrupt) {
+		int n = _sortElements.size();
+		clear();
+		populate(n);
+	}
+
+	displaySortInfo(sortType, _isSorting, numOfComparisons, sortTime.getElapsedTime().asMilliseconds());
+	_animThread = std::thread(&SortController::checkSortAnim, this);
+	_animThread.detach();
+}
+
+/**
+ * @brief Start sort timer, run the algorithm and increment the number of comparisons while the array isn't sorted, and display sort info at the end.
+ * 
+ * @param sortType Number associated to the algorithm
+ */
+void SortController::startSort(int sortType) {
+	// if the last sort completed on its own, the thread has not
+	// been joined yet, so we need to join it
+	if (_sortingThread.joinable()) {
+		_sortingThread.join();
+	}
+
+	_interrupt = false;
+	_isSorting = true;
+
+	_sortingThread = std::thread(&SortController::_startSort, this, sortType);
+}
+
+void SortController::stopSort() {
+	// this only happens if `stopSort` was already called,
+	// so the thread is already joined
+	if (!_sortingThread.joinable()) {
+		return;
+	}
+
+	_interrupt = true;
+	_sortingThread.join();
+	_isSorting = false;
 }
 
 /**
@@ -140,8 +173,8 @@ void SortController::startSort(int sortType) {
  * @return false The array isn't sorted
  */
 bool SortController::isSorted() {
-	for (int n = 0; n < sortElements.size()-1; n++) {
-		if (sortElements[n].value > sortElements[n+1].value)
+	for (int n = 0; n < _sortElements.size()-1; n++) {
+		if (_sortElements[n].value > _sortElements[n+1].value)
 		{
 			return false;
 		}
@@ -156,8 +189,8 @@ bool SortController::isSorted() {
  * 
  */
 void SortController::checkSortAnim() {
-	for (int n = 0; n < sortElements.size(); n++) {
-		sortElements[n].color = sf::Color::Green;
+	for (int n = 0; n < _sortElements.size(); n++) {
+		_sortElements[n].color = sf::Color::Green;
 		sf::sleep(sf::milliseconds(1));
 	}
 };
