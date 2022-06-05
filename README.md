@@ -17,12 +17,15 @@ A lightweight sorting visualizer made with C++ and [SFML](https://www.sfml-dev.o
 ## 📖 I want to contribute to the project!
 Awesome! [Here](https://github.com/alesbe/sorting-visualizer/wiki) you can find some useful info about the visualizer, we accept first contributors too!
 
+*Also, make sure to pull the last changes from [dev](https://github.com/alesbe/sorting-visualizer/tree/dev) branch!*
+
 ## 🗂️ Sort types
-- Bubble sort - **[@alesbe](https://github.com/alesbe)**
-- Selection sort - **[@alesbe](https://github.com/alesbe)**
-- Insertion sort - **[@alesbe](https://github.com/alesbe)**
-- Quick sort - **[@ariajanke](https://github.com/ariajanke)**
-- Cocktail shaker - **[@BlueSkeleton](https://github.com/BlueSkeleton)**
+- Bubble sort
+- Selection sort
+- Insertion sort
+- Quick sort
+- Cocktail shaker sort
+- Bogo sort
 
 ## 🕹️ Usage
 - **Space**: Start sort <br>
