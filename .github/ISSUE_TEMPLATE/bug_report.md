@@ -8,16 +8,16 @@ assignees: ''
 ---
 
 ## Describe you problem:
-<replace me>
+*replace me*
 
 ## Steps to reproduce (optional):
-<replace me>
+*replace me*
 
 ## Additional info (optional):
-<replace me>
+*replace me*
 
 ## Possible fix (optional):
-<replace me>
+*replace me*
 
 ## OS
 - [ ] : Windows
