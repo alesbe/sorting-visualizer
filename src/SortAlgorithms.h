@@ -9,7 +9,7 @@ namespace algo {
 	int insertionSort(std::vector<Sortable>& sortElements, int timeSleep, const std::atomic<bool>& interrupt);
 	int quickSort(std::vector<Sortable>& sortElements, int timeSleep, const std::atomic<bool>& interrupt);
 	int cocktailSort(std::vector<Sortable>& sortElements, int timeSleep, const std::atomic<bool>& interrupt);
-	int bogoSort(std::vector<Sortable>& sortElements, int timeSleep);
+	int bogoSort(std::vector<Sortable>& sortElements, int timeSleep, const std::atomic<bool>& interrupt);
 }
 
 namespace algoUtils {
