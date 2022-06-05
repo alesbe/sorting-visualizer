@@ -3,7 +3,7 @@
 const std::string kNoSort = "<NO ALGORITHM>";
 
 /**
- * @brief Utils::getSortType - Returns the name of the algorithms providing the number asociated to it.
+ * @brief Returns the name of the algorithms providing the number associated to it.
  *
  * @param sortType Number associated to the algorithm
  * @return String of the algorithm name
@@ -35,7 +35,7 @@ std::string Utils::getSortType(int sortType) {
 }
 
 /**
- * @brief Utils::hasNextSortType - Checks if the sort type exists
+ * @brief Checks if the sort type exists
  *
  * @param sortType Number associated to the algorithm
  * @return true The sort algorithm exists

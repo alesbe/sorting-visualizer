@@ -20,14 +20,13 @@ SortController::SortController(sf::Vector2u windowSize, int timeSleep)
 
 /**
  * @brief Empty the array
- * 
  */
 void SortController::clear() {
 	_sortElements.clear();
 }
 
 /**
- * @brief Populate the array with Sorable elements
+ * @brief Populate the array with Sortable elements
  * 
  * @param numOfElements Number of elements to be included in the array (array size)
  */
@@ -40,7 +39,6 @@ void SortController::populate(int numOfElements) {
 
 /**
  * @brief Randomize element positions inside the array
- * 
  */
 void SortController::randomize() {
 	std::random_shuffle(std::begin(_sortElements), std::end(_sortElements));
@@ -62,8 +60,6 @@ void SortController::setTimeSleep(int t) {
  * @param isSorting true = display only sort type and sorting message, false = display all info
  * @param numOfComparisons Number of comparisons that the algorithm running made
  * @param sortTime Time that the algorithm took to sort all elements
- * 
- * 
  */
 void SortController::displaySortInfo(int sortType, bool isSorting, int numOfComparisons, int sortTime) const {
 	system(CLEAR);
@@ -87,12 +83,19 @@ void SortController::displaySortInfo(int sortType, bool isSorting, int numOfComp
 // ────────────────────────────────────────────────────────────────────────────────
 //
 
+/**
+ * @brief Loop the sort algorithm until is sorted or stopped
+ * 
+ * @param sortType Number associated to each sort type
+ */
 void SortController::_startSort(int sortType) {
 	int numOfComparisons = 0;
 	sf::Clock sortTime;
 
+	// Display sort info, (_isSorting) should be false, so it will display "Sorting..."
 	displaySortInfo(sortType, _isSorting, numOfComparisons, sortTime.getElapsedTime().asMilliseconds());
 
+	// Loop the current algorithm until the array is sorted or interrupted
 	while (!isSorted() && !_interrupt)
 	{
 		switch (sortType)
@@ -120,30 +123,38 @@ void SortController::_startSort(int sortType) {
 		}
 	}
 
+	// When the sort is finished or interrupted, _isSorting is false
 	_isSorting = false;
 
-	// if the sorting was interrupted, the array is not sorted
-	// so we replace it with a sorted array so the animation
-	// looks correct
+	/*
+	If the sorting was interrupted, the array is not sorted
+	so we replace it with a sorted array so the animation
+	looks correct
+	*/
 	if (_interrupt) {
 		int n = _sortElements.size();
 		clear();
 		populate(n);
 	}
 
+	// Display sort info, (_isSorting) should be true, so it will display the sort stats
 	displaySortInfo(sortType, _isSorting, numOfComparisons, sortTime.getElapsedTime().asMilliseconds());
+
+	// Run the final animation in a separated thread to prevent issues
 	_animThread = std::thread(&SortController::checkSortAnim, this);
 	_animThread.detach();
 }
 
 /**
- * @brief Start sort timer, run the algorithm and increment the number of comparisons while the array isn't sorted, and display sort info at the end.
+ * @brief Start the sort thread
  * 
  * @param sortType Number associated to the algorithm
  */
 void SortController::startSort(int sortType) {
-	// if the last sort completed on its own, the thread has not
-	// been joined yet, so we need to join it
+	/*
+	If the last sort completed on its own, the thread has not
+	been joined yet, so we need to join it
+	*/
 	if (_sortingThread.joinable()) {
 		_sortingThread.join();
 	}
@@ -154,9 +165,15 @@ void SortController::startSort(int sortType) {
 	_sortingThread = std::thread(&SortController::_startSort, this, sortType);
 }
 
+/**
+ * @brief Stop the sorting activating the interrupt and joining the sort thread
+ * 
+ */
 void SortController::stopSort() {
-	// this only happens if `stopSort` was already called,
-	// so the thread is already joined
+	/*
+	This only happens if `stopSort` was already called,
+	so the thread is already joined
+	*/
 	if (!_sortingThread.joinable()) {
 		return;
 	}

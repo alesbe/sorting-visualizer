@@ -18,24 +18,32 @@
 class SortController
 {
 private:
-	bool _isSorting = false;
-	std::atomic<bool> _interrupt = false;
+	// Configurations
 	int _winWidth, _winHeight;
 	int _timeSleep;
+	
+	// Sort state
+	bool _isSorting = false;
+	std::atomic<bool> _interrupt = false;
 
+	// Vector to be sorted
 	std::vector<Sortable> _sortElements;
 
+	// Threads
 	std::thread _sortingThread;
 	std::thread _animThread;
 
-	// this does the actual sorting loop, while `startSort`
-	// (with no underscore) just starts this function in its own thread
+	/*
+	This does the actual sorting loop, while `startSort`
+	(with no underscore) just starts this function in its own thread
+	*/
 	void _startSort(int sortType);
 
 public:
+	// Constructor
 	SortController(sf::Vector2u windowSize, int timeSleep);
 
-	// getters
+	// Getters
 	bool isSorting() const { return _isSorting; }
 	int winWidth() const { return _winWidth; }
 	int winHeight() const { return _winHeight; }
