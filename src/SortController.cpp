@@ -132,7 +132,8 @@ void SortController::_startSort(int sortType) {
 	}
 
 	displaySortInfo(sortType, _isSorting, numOfComparisons, sortTime.getElapsedTime().asMilliseconds());
-	checkSortAnim();
+	_animThread = std::thread(&SortController::checkSortAnim, this);
+	_animThread.detach();
 }
 
 /**

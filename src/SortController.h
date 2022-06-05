@@ -26,6 +26,7 @@ private:
 	std::vector<Sortable> _sortElements;
 
 	std::thread _sortingThread;
+	std::thread _animThread;
 
 	// this does the actual sorting loop, while `startSort`
 	// (with no underscore) just starts this function in its own thread
