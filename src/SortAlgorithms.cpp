@@ -17,6 +17,7 @@ using std::tuple;
  *
  * @param sortElements Main array containing the elements to be sorted
  * @param timeSleep Time to wait between iterations in miliseconds
+ * @param interrupt Bool to stop the sort process. If is set to true, the function will return
  * @return Number of comparisons made
  */
 int algo::bubbleSort(std::vector<Sortable>& sortElements, int timeSleep, const std::atomic<bool>& interrupt) {
@@ -41,6 +42,7 @@ int algo::bubbleSort(std::vector<Sortable>& sortElements, int timeSleep, const s
  *
  * @param sortElements Main array containing the elements to be sorted
  * @param timeSleep Time to wait between iterations in miliseconds
+ * @param interrupt Bool to stop the sort process. If is set to true, the function will return
  * @return Number of comparisons made
  */
 int algo::selectionSort(std::vector<Sortable>& sortElements, int timeSleep, const std::atomic<bool>& interrupt) {
@@ -68,6 +70,7 @@ int algo::selectionSort(std::vector<Sortable>& sortElements, int timeSleep, cons
  *
  * @param sortElements Main array containing the elements to be sorted
  * @param timeSleep Time to wait between iterations in miliseconds
+ * @param interrupt Bool to stop the sort process. If is set to true, the function will return
  * @return Number of comparisons made
  */
 int algo::insertionSort(std::vector<Sortable>& sortElements, int timeSleep, const std::atomic<bool>& interrupt) {
@@ -109,6 +112,7 @@ int algo::insertionSort(std::vector<Sortable>& sortElements, int timeSleep, cons
  * @param beg First element of the sub array
  * @param end "One past the last" element of the sub array
  * @param timeSleep pauses the thread for this many ms
+ * @param interrupt Bool to stop the sort process. If is set to true, the function will return
  * @return tuple, first is the pivot, second is the number of comparisons
  */
 static int quickSortHelper(std::vector<Sortable>& parent, SortableIterator beg, SortableIterator end, int timeSleep, const std::atomic<bool>& interrupt);
@@ -161,6 +165,7 @@ int algo::quickSort(std::vector<Sortable>& sortElements, int timeSleep, const st
  *
  * @param sortElements Main array containing the elements to be sorted
  * @param timeSleep Time to wait between iterations in miliseconds
+ * @param interrupt Bool to stop the sort process. If is set to true, the function will return
  * @return Number of comparisons made
  */
 int algo::cocktailSort(std::vector<Sortable>& sortElements, int timeSleep, const std::atomic<bool>& interrupt) {
@@ -206,6 +211,7 @@ int algo::cocktailSort(std::vector<Sortable>& sortElements, int timeSleep, const
  * 
  * @param sortElements Main array containing the elements to be sorted
  * @param timeSleep Time to wait between iterations in miliseconds
+ * @param interrupt Bool to stop the sort process. If is set to true, the function will return
  * @return Number of comparisons made
  */
 int algo::bogoSort(std::vector<Sortable>& sortElements, int timeSleep, const std::atomic<bool>& interrupt) {
@@ -214,7 +220,7 @@ int algo::bogoSort(std::vector<Sortable>& sortElements, int timeSleep, const std
 	if (interrupt) {
 		return numOfComparisons;
 	}
-	
+
 	std::random_shuffle(std::begin(sortElements), std::end(sortElements));
 	numOfComparisons++;
 
