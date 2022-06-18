@@ -212,7 +212,7 @@ int algo::cocktailSort(std::vector<Sortable>& sortElements, int timeSleep, const
  * @param timeSleep Time to wait between iterations in miliseconds
  * @return Number of comparisons made
  */
-int algo::bogoSort(std::vector<Sortable>& sortElements, int timeSleep) {
+int algo::bogoSort(std::vector<Sortable>& sortElements, int timeSleep, const std::atomic<bool>& interrupt) {
 	int numOfComparisons = 0;
 
 	std::random_shuffle(std::begin(sortElements), std::end(sortElements));
