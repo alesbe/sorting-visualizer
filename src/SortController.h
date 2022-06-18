@@ -24,7 +24,7 @@ private:
 	
 	// Sort state
 	bool _isSorting = false;
-	std::atomic<bool> _interrupt = false;
+	std::atomic<bool> _interrupt = { false };
 
 	// Vector to be sorted
 	std::vector<Sortable> _sortElements;
