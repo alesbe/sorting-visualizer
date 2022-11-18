@@ -36,6 +36,9 @@ Awesome! [Here](https://github.com/alesbe/sorting-visualizer/wiki) you can find 
 - **Arrow Up / Arrow down**: Change sort type <br>
 
 ## 🖨️ Download
+**Requirements:**
+- CMake
+
 ### 🐧 Linux
 - Clone the project: `git clone https://github.com/alesbe/sorting-visualizer && cd sorting-visualizer`
 - Run `./install.sh`
