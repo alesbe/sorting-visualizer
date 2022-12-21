@@ -118,6 +118,9 @@ void SortController::_startSort(int sortType) {
 		case 5:
 			numOfComparisons += algo::bogoSort(_sortElements, _timeSleep, _interrupt);
 			break;
+		case 6:
+			numOfComparisons += algo::bitonicSort(_sortElements, _timeSleep, _interrupt);
+			break;
 		default:
 			return;
 		}

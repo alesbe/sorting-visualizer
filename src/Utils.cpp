@@ -29,6 +29,9 @@ std::string Utils::getSortType(int sortType) {
 	case 5:
 		return "Bogo sort";
 
+	case 6:
+		return "Bitonic sort";
+
 	default:
 		return kNoSort;
 	}
