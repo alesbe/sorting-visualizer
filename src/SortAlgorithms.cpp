@@ -1,6 +1,7 @@
 #include "SortAlgorithms.h"
 
 #include <atomic>
+#include <limits>
 #include <tuple>
 
 using SortableIterator = std::vector<Sortable>::iterator;
@@ -217,6 +218,121 @@ int algo::bogoSort(std::vector<Sortable>& sortElements, int timeSleep, const std
 
 	std::random_shuffle(std::begin(sortElements), std::end(sortElements));
 	numOfComparisons++;
+
+	return numOfComparisons;
+}
+
+namespace bitonicUtils {
+
+	/**
+	 * @brief Bitonic merge: Recursively merge 2 bitonic sequences into 1 monotonic sequence
+	 * @author @ForgotMyCode
+	 * @param sortElements Main array containing the elements to be sorted
+	 * @param timeSleep Time to wait between iterations in miliseconds
+	 * @param interrupt Bool to stop the sort process
+	 * @param begin Index of inclusive start of the sub-array
+	 * @param end Index of exclusive end of the sub-array
+	 * @param isMinimizing Bool, if set to true, left half of the subarray will be minimized (it will be smaller than the right subarray),
+	 * 	otherwise it will be maximized (it will be larger than the right subarray)
+	 * @param numOfComparisons Number of comparisons made
+	 */
+	void internalBitonicMerge(std::vector<Sortable>& sortElements, int timeSleep, const std::atomic<bool>& interrupt, size_t begin, size_t end, bool isMinimizing, int& numOfComparisons) {
+		if(begin + size_t{1} >= end || interrupt) {
+			return;
+		}
+
+		auto const mid = (begin + end) / size_t{2};
+		auto const stride = mid - begin;
+
+		for(size_t i = begin; i < mid; ++i) {
+			if(isMinimizing) {
+				++numOfComparisons;
+				// min
+				if(sortElements[i].value > sortElements[i + stride].value) {
+					algoUtils::swap(sortElements, timeSleep, sortElements[i], sortElements[i + stride]);
+				}
+			}
+			else {
+				++numOfComparisons;
+				// max
+				if(sortElements[i].value < sortElements[i + stride].value) {
+					algoUtils::swap(sortElements, timeSleep, sortElements[i], sortElements[i + stride]);
+				}
+			}
+		}
+
+		// recurse left
+		internalBitonicMerge(sortElements, timeSleep, interrupt, begin, mid, isMinimizing, numOfComparisons);
+		// recurse right
+		internalBitonicMerge(sortElements, timeSleep, interrupt, mid, end, isMinimizing, numOfComparisons);
+	}
+
+	/**
+	 * @brief Bitonic sort: Recursively create left and right bitonic sequences and then merge them together into a monotonic sequence
+	 * @author @ForgotMyCode
+	 * @param sortElements Main array containing the elements to be sorted
+	 * @param timeSleep Time to wait between iterations in miliseconds
+	 * @param interrupt Bool to stop the sort process
+	 * @param begin Index of inclusive start of the sub-array
+	 * @param end Index of exclusive end of the sub-array
+	 * @param isMinimizing Bool, if set to true, left half of the subarray will be minimized (it will be smaller than the right subarray, 
+	 *	results in increasing sequence), otherwise it will be maximized (it will be larger than the right subarray, results in decreasing sequence)
+	 * @param numOfComparisons Number of comparisons made
+	 */
+	void internalBitonicSort(std::vector<Sortable>& sortElements, int timeSleep, const std::atomic<bool>& interrupt, size_t begin, size_t end, bool isMinimizing, int& numOfComparisons) {
+		if(begin + size_t{1} >= end || interrupt) {
+			return;
+		}
+
+		auto const mid = (begin + end) / size_t{2};
+
+		// create left bitonic subsequence
+		internalBitonicSort(sortElements, timeSleep, interrupt, begin, mid, true, numOfComparisons);
+		// create right bitonic subsequence
+		internalBitonicSort(sortElements, timeSleep, interrupt, mid, end, false, numOfComparisons);
+		// merge
+		internalBitonicMerge(sortElements, timeSleep, interrupt, begin, end, isMinimizing, numOfComparisons);
+	}
+}
+
+/**
+ * @brief Bitonic sort
+ * @details Performs recursive Bitonic sort. It is recommended the input size is a power of 2,
+ *	otherwise the input will be padded to the closest (not less) power of 2.
+ *	The padding is removed when the sorting finishes.
+ * @author @ForgotMyCode
+ * @param sortElements Main array containing the elements to be sorted
+ * @param timeSleep Time to wait between iterations in miliseconds
+ * @param interrupt Bool to stop the sort process
+ * @return Number of comparisons made
+ */
+int algo::bitonicSort(std::vector<Sortable>& sortElements, int timeSleep, const std::atomic<bool>& interrupt) {
+	if(sortElements.empty() || interrupt) {
+		return 0;
+	}
+
+	size_t n = sortElements.size();
+
+	// find closest (not less) power of 2
+	size_t closestNotLessPowerOf2{ 1 };
+	while(closestNotLessPowerOf2 < n) {
+		closestNotLessPowerOf2 *= size_t{2};
+	}
+
+	size_t const paddingSize = closestNotLessPowerOf2 - n;
+
+	// please use a power of 2 as # of elements to avoid padding!
+
+	// add padding
+	sortElements.insert(sortElements.end(), paddingSize, Sortable(0.f, 0.f, std::numeric_limits<int>::max()));
+
+	int numOfComparisons = 0;
+
+	// sort
+	bitonicUtils::internalBitonicSort(sortElements, timeSleep, interrupt, size_t{0}, sortElements.size(), true, numOfComparisons);
+
+	// remove padding
+	sortElements.erase(std::next(sortElements.begin(), n), sortElements.end());
 
 	return numOfComparisons;
 }
