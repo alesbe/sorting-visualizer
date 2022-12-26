@@ -26,6 +26,7 @@ Awesome! [Here](https://github.com/alesbe/sorting-visualizer/wiki) you can find 
 - Quick sort
 - Cocktail shaker sort
 - Bogo sort
+- Bitonic sort
 
 ## 🕹️ Usage
 - **Space**: Start sort <br>
