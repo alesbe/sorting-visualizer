@@ -1,11 +1,3 @@
-# Hello, and welcome!
-
-  - [Mini Demo](#📊-sorting-visualizer)
-  - [How to contribute](#📖-i-want-to-contribute-to-the-project)
-  - [Sorting Options](#🗂️-sort-types)
-  - [How to use](#🕹️-usage)
-  - [Download Instructions](#🖨️-download)
-
 # 📊 Sorting Visualizer
 
 A lightweight sorting visualizer made with C++ and [SFML](https://www.sfml-dev.org/index.php).
