@@ -84,12 +84,28 @@ int main()
 						system(CLEAR);
 						std::cout << "Sort changed to: " << Utils::getSortType(sortType) << std::endl;
 					}
+					else {
+						//Go to the first sorting algorithm
+						sortType = 0;
+						system(CLEAR);
+						std::cout << "Sort changed to " << Utils::getSortType(sortType) << std::endl;
+					}
 					break;
 
 				// Change sort type (decrease)
 				case sf::Keyboard::Down:
 					if (sortType > 0) {
 						sortType--;
+						system(CLEAR);
+						std::cout << "Sort changed to: " << Utils::getSortType(sortType) << std::endl;
+					}
+					else {
+						//Go to the last sorting algorithm
+						while(Utils::hasNextSortType(sortType))
+						{
+							sortType++;
+						}
+
 						system(CLEAR);
 						std::cout << "Sort changed to: " << Utils::getSortType(sortType) << std::endl;
 					}
