@@ -52,6 +52,19 @@ Awesome! [Here](https://github.com/alesbe/sorting-visualizer/wiki) you can find 
 - Run `./install.sh`
 
 ### 🖥️ Windows / MacOS
-The libraries included with the project only work with gcc compiler, for now, if you want to use it on Windows or macOS, you'll need to [download sfml](https://www.sfml-dev.org/download/sfml/2.5.1/) and compile the source code located in `/src` yourself.
+#### [Download from releases](https://github.com/alesbe/sorting-visualizer/releases/)
 
-Once you have compiled the source files you can set `SFML_DIR` in `CMakeLists.txt` to the path which contains SFMLConfig.cmake. This will depend on where you have installed SFML to, for instance `C:/Program Files (x86)/SFML/lib/cmake/SFML`. From the root directory of the repository run `mkdir build cd build` and then run `cmake ..` to generate make files. For a list of generators you can type`cmake -G`. For instance if you want to build for the latest version of Visual Studio run `cmake -G 'Visual Studio 17 2022' ..` from within `/build`.
+If you want to compile the project by yourself you need to follow the next steps:
+1. Download SFML from the [official website](https://www.sfml-dev.org/download/sfml/2.6.1/)
+2. Download [CMake](https://cmake.org/download/)
+3. Clone the repository
+4. Open `CMakeLists.txt` and locate the variable `SFML_DIR`. Set the path to the route where the SFML CMake files are located. For instance `C:/Program Files (x86)/SFML/lib/cmake/SFML`.
+5. From the root directory of the repository, run:
+```
+mkdir build cd build
+cmake ..
+cmake -G 'Visual Studio 17 2022' ..
+```
+6. In the `/build` directory should be a Visual Studio solution. Now you can open the solution and compile the file with the play button as usual!
+
+_Note: If you don't want to use Visual Studio 2022, download SFML for your target compiler and change the cmake generator in step 6. You can check the list of generators with cmake -G_
