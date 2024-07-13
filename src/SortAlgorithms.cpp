@@ -336,6 +336,36 @@ int algo::bitonicSort(std::vector<Sortable>& sortElements, int timeSleep, const 
 
 	return numOfComparisons;
 }
+/**
+ * @brief Odd-Even/Brick sort
+ * @author @Niko-the-Useless
+ * @param sortElements Main array containing the elements to be sorted
+ * @param timeSleep Time to wait between iterations in miliseconds
+ * @param interrupt Bool to stop the sort process
+ * @return Number of comparisons made
+ */
+
+int algo::oddEvenSort(std::vector<Sortable>& sortElements, int timeSleep, const std::atomic<bool>& interrupt){
+	int numOfComparisons = 0;
+	
+	for(int n=1;n<=sortElements.size()-2;n=n+2){ //bubble sort for odd elements
+		if (interrupt){return numOfComparisons;}
+		if(sortElements[n].value>sortElements[n+1].value){
+			algoUtils::swap(sortElements, timeSleep, sortElements[n], sortElements[n+1]);
+		}
+		numOfComparisons++;
+	}
+	
+	for(int n=0;n<=sortElements.size()-2;n=n+2){ //bubble sort for even elements
+		if (interrupt){return numOfComparisons;}
+		if(sortElements[n].value>sortElements[n+1].value){
+			algoUtils::swap(sortElements, timeSleep, sortElements[n], sortElements[n+1]);
+		}
+		numOfComparisons++;
+	}
+
+	return numOfComparisons; 
+}
 
 //
 // ────────────────────────────────────────────────────────── II ──────────

@@ -32,6 +32,9 @@ std::string Utils::getSortType(int sortType) {
 	case 6:
 		return "Bitonic sort";
 
+	case 7:
+		return "Odd-Even sort";
+
 	default:
 		return kNoSort;
 	}
