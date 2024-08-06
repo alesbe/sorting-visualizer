@@ -121,6 +121,9 @@ void SortController::_startSort(int sortType) {
 		case 6:
 			numOfComparisons += algo::bitonicSort(_sortElements, _timeSleep, _interrupt);
 			break;
+		case 7:
+			numOfComparisons += algo::oddEvenSort(_sortElements, _timeSleep, _interrupt);
+			break;
 		default:
 			return;
 		}

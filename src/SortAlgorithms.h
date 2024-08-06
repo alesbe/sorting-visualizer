@@ -11,6 +11,7 @@ namespace algo {
 	int cocktailSort(std::vector<Sortable>& sortElements, int timeSleep, const std::atomic<bool>& interrupt);
 	int bogoSort(std::vector<Sortable>& sortElements, int timeSleep, const std::atomic<bool>& interrupt);
 	int bitonicSort(std::vector<Sortable>& sortElements, int timeSleep, const std::atomic<bool>& interrupt);
+	int oddEvenSort(std::vector<Sortable>& sortElements, int timeSleep, const std::atomic<bool>& interrupt);
 }
 
 namespace algoUtils {
