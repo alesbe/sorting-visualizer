@@ -35,7 +35,7 @@ Awesome! [Here](https://github.com/alesbe/sorting-visualizer/wiki) you can find 
 - **Bitonic sort**
   - Bitonic sort is a comparison based sorting algorithm that can be run with parallel implementation. Within different subarrays, the algorithm checks if the first element is smaller than the second and vice versa. It continuously does that on larger subarrays until the whole dataset is sorted. More on bitonic sort can be found [here](https://www.geeksforgeeks.org/bitonic-sort/).
 - **Odd-Even sort**
- - Odd-Even sort is comparassion vased sorting algorithm developed for use on pararell processors, its based on bubble sort but is divided into two phases Odd and Even Phase. On Odd phase algorithm performs bubble sort on odd indexed elements, during even phase on even indexed elements. More on Odd-Even sort can be found [here](https://www.geeksforgeeks.org/odd-even-sort-brick-sort/).
+  - Odd-Even sort is comparassion vased sorting algorithm developed for use on pararell processors, its based on bubble sort but is divided into two phases Odd and Even Phase. On Odd phase algorithm performs bubble sort on odd indexed elements, during even phase on even indexed elements. More on Odd-Even sort can be found [here](https://www.geeksforgeeks.org/odd-even-sort-brick-sort/).
 
 
 ## 🕹️ Usage
